@@ -1,0 +1,22 @@
+{
+    "title":[
+        {"img":"shop1_274_top_991469.jpg"}
+    ],
+    "category1":[
+        {"category":"신상품"},
+        {"category":"상품명"},
+        {"category":"낮은가격"},
+        {"category":"높은가격"}
+    ],
+    "submeun1":[
+        {"submeun":"상의"},
+        {"submeun":"하의"},
+        {"submeun":"아우터"}
+    ],
+    "submeun2":[
+        {"submeun":null}
+    ],
+    "submeun3":[
+        {"submeun":null}
+    ]
+}

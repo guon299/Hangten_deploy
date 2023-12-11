@@ -1,0 +1,21 @@
+{
+    "title":[
+        {"img":"shop1_42_top_445188.jpg"}
+    ],
+    "category1":[
+        {"category":"신상품"},
+        {"category":"상품명"},
+        {"category":"낮은가격"},
+        {"category":"높은가격"}
+    ],
+    "submeun1":[
+        {"submeun":"행텐"},
+        {"submeun":"행텐키즈"}
+    ],
+    "submeun2":[
+        {"submeun":null}
+    ],
+    "submeun3":[
+        {"submeun":null}
+    ]
+}
