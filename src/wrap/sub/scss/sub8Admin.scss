@@ -1,0 +1,209 @@
+#sub8Admin {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 7;
+    overflow-y: scroll;
+    &::-webkit-scrollbar{
+        width: 0;
+    }
+    .container {
+        width: 100%;
+        margin: 0 auto;
+        background: #fafafa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .signin-box {
+            width: 100%;
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 100px 0 300px 0;
+            .top {
+                width: 100%;
+                .button-box {
+                    width: 100%;
+                    padding: 17px 20px 40px 20px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    button {
+                        background: url(../../../../public/images/modal/icon_go_back.png) no-repeat;
+                        background-size: auto 16px;
+                        width: 16px;
+                        height: 16px;
+                        border: 0;
+                    }
+                    a {
+                        display: block;
+                        background: url(../../../../public/images/modal/icon_go_home.png) no-repeat;
+                        background-size: auto 16px;
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+                .logo-box {
+                    width: 100%;
+                    padding: 5px 0 10px 0;
+                    a {
+                        display: flex;
+                        width: 100%;
+                        justify-content: center;
+                        img {
+                            max-width: 50%;
+                        }
+                    }
+                }
+            }
+            .middle {
+                width: 100%;
+                position: relative;
+                .content {
+                    width: 100%;
+                    position: relative;
+                    padding: 34px 0;
+                    border-top: 1px solid #f5f5f5;
+                    .tab-button-box {
+                        width: 100%;
+                        padding: 20px 20px 40px 20px;
+                        text-align: center;
+                        button {
+                            width: 50%;
+                            height: 34px;
+                            font-size: 15px;
+                            font-weight: 400;
+                            color: #000;
+                            text-align: center;
+                            border-radius: 20px;
+                            border: 1px solid #f6f7f9;
+                            background: #ddd;
+                        }
+                    }
+                    form {
+                        width: 100%;
+                        ul {
+                            width: 100%;
+                            li {
+                                width: 100%;
+                                margin: 10px 0 0 0;
+                                .gap {
+                                    width: 100%;
+                                    position: relative;
+                                    input[type='text'], input[type='password'] {
+                                        width: 100%;
+                                        height: 50px;
+                                        padding: 0 0 0 5px;
+                                        border: 1px solid #e5e5e5;
+                                        border-bottom: 1px solid #e5e5e5;
+                                        font-size: 16px;
+                                        color: #000;
+                                        outline: none;
+                                        transition: all 0.2s ease-in-out;
+                                        &:focus {
+                                            border-bottom: 1px solid #222;
+                                            vertical-align: center;
+                                            padding: 10px 0 0 0;
+                                            &::placeholder{
+                                                color: #fff;
+                                            }  
+                                        }
+                                        &::placeholder{
+                                            color: #777;
+                                            font-size: 15px;
+                                        }
+                                    }
+                                    input[type='submit']{
+                                        width: 100%;
+                                        height: 54px;
+                                        background: #fff;
+                                        border: 1px solid #333;
+                                        font-size: 17px;
+                                        color: #555;
+                                        font-weight: 700;
+                                        border-radius: 10px;
+                                        margin: 10px 0 0 0;
+                                        cursor: pointer;
+                                    }
+                                    label {
+                                        position: absolute;
+                                        top: 0;
+                                        left: 0;
+                                        font-size: 12px;
+                                        color: #aaa;
+                                    }
+                                    button {
+                                        background: #fff;
+                                        border: 0;
+                                        position: absolute;
+                                        top: 10px;
+                                        right: 10px;
+                                        img {
+                                            width: 18px;
+                                        }
+                                    }
+                                }
+                                &.SaveIdCheck {
+                                    margin: 15px 0 5px 0;
+                                    label {
+                                        font-size: 15px;
+                                        font-weight: 400;
+                                        vertical-align: top;
+                                        color: #222;
+                                        input[type='checkbox']{
+                                            appearance: none;
+                                            margin: 0 5px 0 0;
+                                            width: 24px;
+                                            height: 24px;
+                                            border: 1px solid #c5c5c5;
+                                            background-color: #fff;
+                                            border-radius: 50%;
+                                            &:checked {
+                                                border: 1px solid #222;
+                                                background-color: #222;
+                                                background-image: url(../../../../public/images/modal/icon_check.png);
+                                                background-size: 9.5px;
+                                                background-repeat: no-repeat;
+                                                background-position: 50%;
+                                            }
+                                        }
+                                    }
+                                }
+                                &.sign {
+                                    width: 100%;
+                                    margin: 15px 0 0 0;
+                                    .gap {
+                                        width: 100%;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: space-between;
+                                        .search-box {
+                                            a {
+                                                font-size: 15px;
+                                                color: #888;
+                                                line-height: 17px;
+                                            }
+                                            span {
+                                                vertical-align: top;
+                                                margin: 0 10px;
+                                                color: #e1e1e1;
+                                            }
+                                        }
+                                        .signup-box {
+                                            a {
+                                                font-size: 15px;
+                                                color: #222;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}

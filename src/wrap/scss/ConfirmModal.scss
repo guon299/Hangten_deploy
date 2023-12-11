@@ -1,0 +1,143 @@
+#confirmModal {
+    z-index: 10;
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #555;
+    .container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        .content{
+            width: 380px;
+            background-color: #fff;
+            border-radius: 20px;
+            .header{
+                width: 100%;
+                padding: 15px;
+                background-color: #4e25e6;
+                border-top-left-radius: 20px;
+                border-top-right-radius: 20px;
+                .title{
+                    width: 100%;
+                    padding: 10px 0;
+                    h2{
+                        width: 100%;
+                        height: 13px;
+                        background: url('../../../public/images/confirm/icon1.png') no-repeat 0 100%;
+                        background-size: contain;
+                    }
+
+                }
+                .text{
+                    width: 100%;
+                    margin: 15px 0;
+                    p{
+                        width: 100%;
+                        margin: 0 0 13px 0;
+                        color: #fff;
+                        font-size: 14px;
+                        font-weight: 600;
+                        strong{
+                            font-size: 18px;
+                            font-weight: 800;
+                        }
+                    }
+                    span{
+                        font-size: 11px;
+                        width: 100%;
+                        color: #fff;
+                    }
+                }
+            }
+            .body{
+                width: 100%;
+                .img-box{
+                    width: 100%;
+                    height: 500px;
+                    overflow-y: auto;
+                    img{
+                        width: 100%;
+                    }
+                }
+            }
+            .footer{
+                width: 100%;
+                padding: 10px 15px;
+                background: #ddd;
+                border-radius: 20px;
+                .text-box{
+                    width: 100%;
+                    span{
+                        width: 100%;
+                        display: block;
+                        margin: 0 0 15px 0;
+                        font-size: 12px;
+                        color: #000;
+                        font-weight: 500;
+                        em{
+                            font-weight: 400;
+                        }
+                        strong{
+                            color: #113aca;
+                        }
+                    }
+                    .ment{
+                        width: 100%;
+                        h2{
+                            color: #000;
+                            font-size: 15px;
+                            font-weight: 700;
+                            box-shadow: inset 0 -10px 0 #daf244;
+                            margin: 0 0 5px 0;
+                        }
+                        h3{
+                            font-size: 13px;
+                            font-weight: 400;
+                            color: #000;
+                        }
+                    }
+                }
+                .button-box{
+                    width: 100%;
+                    height: 45px;
+                    margin: 15px 0 0 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    .close-btn{
+                        width: 26px;
+                        height: 26px;
+                        margin: 0 15px 0 0;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 50%;
+                        border: 1px solid #555;
+                        i{
+                            display: block;
+                            width: 10px;
+                            height: 10px;
+                            background: url('../../../public/images/confirm/icon2.png') no-repeat;
+                            background-size: contain;
+                        }
+                    }
+                    .ok-btn{
+                        width: 310px;
+                        height: 100%;
+                        background-color: #113aca;
+                        border: 1px solid #113aca;
+                        border-radius: 10px;
+                        color: #fff;
+                        font-size: 14px;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,51 @@
+#section6 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0 0 100px 0;
+    .container {
+        max-width: 1500px;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+        .slide-wrap{
+            width: 100% * 3.5;
+            overflow: hidden;
+            position: relative;
+            margin-left: -50%;
+            .slide-view{
+                width: 100%;
+                display: flex;
+                position: relative;
+                .slide{
+                    width: 100%;
+                    img{
+                        width: 100%;
+                    }
+                }
+            }
+        }
+        .left-btn{
+            z-index: 2;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            cursor: pointer;
+            i{
+                font-size: 60px;
+                transform: rotate(180deg);
+            }
+        }
+        .right-btn{
+            z-index: 2;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            cursor: pointer;
+            i{
+                font-size: 60px;
+            }
+        }
+    }
+}

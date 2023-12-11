@@ -1,0 +1,25 @@
+#section2 {
+    width: 100%;
+    padding: 40px 0 111px 0;
+    .container{
+        width: 100%;
+        text-align: center;
+        .title{
+            width: 100%;
+            padding-bottom: 33px;
+            h2{
+                font-size: 25px;
+                font-weight: 500;
+                letter-spacing: -0.6px;
+            }
+        }
+        .text-box{
+            width: 100%;
+            span{
+                font-size: 16px;
+                letter-spacing: -0.5px;
+                line-height: 2;
+            }
+        }
+    }
+}

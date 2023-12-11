@@ -1,0 +1,73 @@
+#searchModal {
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 155px;
+    height: 175px;
+    background: #f9f9f9;
+    z-index: 4;
+    &.on {
+        top: 100px;
+    }
+    .container {
+        width: 100%;
+        padding: 32px 60px;
+        position: relative;
+        .filter-box {
+            width: 100%;
+            padding: 0 0 13px 0;
+            ul {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: top;
+                li {
+                    vertical-align: middle;
+                    padding: 0 3px 9px;
+                    margin: 0 5px 11px 5px;
+                    a {
+                        font-size: 14px;
+                        font-weight: 200;
+                        color: #222;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+        form {
+            width: 100%;
+            input {
+                width: 100%;
+                border: 1px solid #222;
+                background: #222;
+                color: #fff;
+                padding: 22px;
+                font-size: 16px;
+                font-weight: 300;
+                text-align: center;
+                &::placeholder {
+                    font-size: 15px;
+                    font-weight: 200;
+                    color: #fff;
+                }
+            }
+        }
+        .button-box {
+            position: absolute;
+            bottom: 50px;
+            right: 100px;
+            button {
+                background: transparent;
+                border: none;
+                transform: rotate(-90deg);
+                cursor: pointer;
+                span {
+                    font-family: 'Nanum Pen Script';
+                    font-size: 20px;
+                    color: #fff;
+                    font-weight: 100;
+                }
+            }
+        }
+    }
+}

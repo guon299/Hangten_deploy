@@ -1,0 +1,143 @@
+
+@mixin text() {
+    font-size: 14px;
+    font-weight: 300;
+    color: #d1d1d1;
+    line-height: 180%;
+}
+
+@mixin after($height) {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 1px;
+    height: $height;
+    background: rgba(112, 112, 112, 0.5);
+}
+
+#footer {
+    user-select: none;
+    position: relative;
+    z-index: 1;
+    width: 100%;    
+    margin: 125px 0 0 0;
+    background: #121212;
+    .container {
+        width: 100%;
+        max-width: 1500px;
+        margin: 0 auto;
+        .row1 {
+            width: 100%;
+            padding: 100px 0 0 0;
+            .gap {
+                width: 100%;
+                display: flex;
+                align-items: top;
+                justify-content: flex-start;
+                .left {
+                    width: 500px;
+                    .logo {
+                        
+                        a {
+                            display: block;
+                            padding: 0 0 20px 0;
+                            img {
+                                height: 28px;
+                            }
+                        }
+                    }
+                    ul {
+                        width: 100%;
+                        li {
+                            width: 100%;
+                            p {
+                                @include text();
+                                a {
+                                    @include text();
+                                    text-align: center;
+                                }
+                            }
+                        }
+                    }
+                }
+                .right {
+                    width: 1000px;
+                    display: flex;
+                    justify-content: flex-end;
+                    .customer-center {
+                        padding: 0 80px 0 0;
+                        margin: 0 30px 0 0;
+                        position: relative;
+                        li {
+                            &:nth-child(1) {
+                                &::after {
+                                    @include after(200px);
+                                }
+                            }
+                            p {
+                                @include text();
+                                a {
+                                    @include text();
+                                }
+                            }
+                        }
+                    }
+                    .notice {
+                        padding: 0 80px 0 0;
+                        margin: 0 30px 0 0;
+                        position: relative;
+                        li {
+                            &:nth-child(1){
+                                &::after {
+                                    @include after(200px);
+                                }
+                            }
+                            a {
+                                @include text();
+                            }
+                        }
+                    }
+                    .signupin {
+                        padding: 0 80px 0 0;
+                        li {
+                            a {
+                                @include text();
+                            }
+                        }
+                    }
+                    
+                }
+            }
+        }
+        .row2 {
+            width: 100%;
+            margin: 62px 0 0 0;
+            padding: 62px 0 53px 0;
+            border-top: 1px solid #4b4b4b;
+            ul {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                li {
+                    a {
+                        @include text();
+                    }
+                    &:nth-child(3), &:nth-child(5) {
+                        a {
+                            color: #999;
+                        }
+                    }
+                    i {
+                        display: inline-block;
+                        margin: 0 15px;
+                        width: 1px;
+                        height: 28px;
+                        background: #4b4b4b;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,38 @@
+ConfirmModalComponent.jsx   회원가입 설명 모달창
+FooterComponent.jsx 
+GoTopComponent.jsx
+HeaderComponent.jsx
+HpComponent.jsx 휴대폰인증번호
+postCodeComponent.jsx 주소검색
+QuickMenuComponent.jsx
+SearchModalComponent.jsx
+MainComponet.jsx
+
+
+MainComponet.jsx
+    - SectionComponent1.jsx
+    - SectionComponent2.jsx 브랜드설명
+    - SectionComponent3.jsx 이미지 & 브랜드설명
+    - SectionComponent4.jsx 이미지 링크 hover 이벤트이름
+    - SectionComponent5.jsx 카테고리별 제품리스트 더보기 클릭이벤트
+    - SectionComponent6.jsx 배너 슬라이드
+    - SectionComponent7.jsx
+
+SubComponent.jsx
+    -Sub1Component.jsx
+    -Sub2Component.jsx
+    -Sub3Component.jsx
+    -Sub4Component.jsx
+    -Sub5Component.jsx
+    -Sub6Component.jsx
+    -Sub7Component.jsx  회원가입창
+    -Sub7SignUpComponent.jsx 회원가입내용 입력창
+    -Sub7SignUpOkComponent.jsx  가입완료 창
+    -Sub8SearchIdComponent.jsx
+    -Sub8SearchIdResultComponent.jsx
+    -Sub8SearchPwComponent.jsx
+    -Sub8SearchPwResultComponent.jsx
+    -Sub9Component.jsx 장바구니
+    -Sub10Component.jsx
+    -Sub11NoticeComponent.jsx
+

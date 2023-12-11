@@ -1,0 +1,232 @@
+
+HpComponent.jsx 휴대폰인증번호
+postCodeComponent.jsx 주소검색
+
+
+
+MainComponet.jsx
+    - SectionComponent2.jsx 설계
+    타이틀
+    서브타이틀
+    넓이 가운데정렬
+
+
+    - SectionComponent3.jsx 이미지 & 브랜드설명
+    display flex
+    이미지
+    width 50%
+
+    제품설명
+    width 50%
+    text-box 위아래,좌우정렬
+
+    - SectionComponent4.jsx 이미지 링크 hover 이벤트이름
+    text-box, img-box 140px 140px
+    position absolute 지정 2겹
+    text-box opactily 0
+    hover: opactily 0.7
+
+    - SectionComponent5.jsx 카테고리별 제품리스트 더보기 클릭이벤트
+    JSON파일 axiox 불러오기
+    맵함수 사용 리스트 정렬
+    제품박스 width 25px
+    링크 이름대로 리스트 변경
+    더보기클릭 시 숨겨진 리스트 보임 
+
+    - SectionComponent6.jsx 배너 슬라이드
+    배너 width 50%
+    롤링슬라이드 위해
+        {"번호":"MAIN_S06_001","이미지":"sec6_4.jpeg","설명1":"#인플루언서","설명2":"_REVIEW"},
+        {"번호":"MAIN_S06_002","이미지":"sec6_1.jpeg","설명1":"20주년","설명2":"행텐데이"},
+        {"번호":"MAIN_S06_003","이미지":"sec6_2.jpeg","설명1":"HOT TEN","설명2":""},
+        {"번호":"MAIN_S06_004","이미지":"sec6_3.jpeg","설명1":"겨울신상","설명2":"기획전"},
+        {"번호":"MAIN_S06_005","이미지":"sec6_4.jpeg","설명1":"#인플루언서","설명2":"_REVIEW"},
+        {"번호":"MAIN_S06_006","이미지":"sec6_1.jpeg","설명1":"20주년","설명2":"행텐데이"},
+        {"번호":"MAIN_S06_007","이미지":"sec6_2.jpeg","설명1":"HOT TEN","설명2":""}
+        4 > 1 > 2 > 3 > 4 > 1 순서
+        클릭시 50%만큼 슬라이드뷰 왼쪽으로 이동
+
+
+SubComponent.jsx
+    -Sub7Component.jsx  회원가입창
+        회원가입 버튼 클릭 시  useNavigate() 사용 회원가입 입력창 이동
+        아이콘 클릭시 UseDispatch 로 confirmModal 상태변수 값 true 저장 > 모달창
+
+    -Sub7SignUpComponent.jsx 회원가입내용 입력창
+        휴대폰 인증하기 클릭시 UseDispatch 로 HpconfirmModal 상태변수 값 true 저장 > 인증창
+        아이디 제한조건
+        const   regexp1 = /[`~!@#$%^&*()\-_=+[{\]}\\|;:'",<.>/?]/g;
+        const   regexp2 = /[A-Z]/g;
+        const   regexp3 = /[가-힣ㄱ-ㅎㅏ-ㅣ]/g;
+        const   regexp4 = /\s/g;
+        const   regexp5 = /^(.){4,16}$/g;
+        아이디는 영문소문자 또는 숫자 4~16자로 입력해 주세요.
+        대문자/공백/특수문자가 포함되었거나, 숫자로 시작 또는 숫자로만 이루어진 아이디는 사용할 수 없습니다.
+        이미 가입된 아이디면
+        아이디는 사용 불가능한 아이디입니다.  => hangten_id_check.php연동
+    
+    hangten_id_check.php
+    $sql = "SELECT  userId FROM hangten_table";
+    $result = mysqli_query($conn,$sql);
+
+   
+    if(mysqli_num_rows($result)>0){
+        $arr = array();
+        while($row = mysqli_fetch_array($result)){
+            array_push($arr,array(
+                '아이디'     => $row['userId']
+            ));
+        }
+    }
+    $json = json_encode($arr, JSON_UNESCAPED_UNICODE);
+    echo $json;
+
+    SELECT 문을 통해 데이터베이스에서 가입된 아이디들을 불러오고
+    회원가입할려는 아이디에 가입된 아이디가 있으면 
+    아이디는 사용 불가능한 아이디입니다. 출력
+
+    비밀번호 제한조건
+
+    const regexpPw1 = /^(.){10,16}$/g;
+    const regexpPw2 = /((?=.*[A-Za-z])+(?=.*[0-9])+)|((?=.*[A-Za-z])+(?=.*[`~!@#$%^&*()\-_=+[{\]}\\|;:'",<.>/?])+)|((?=.*[0-9])+(?=.*[`~!@#$%^&*()\-_=+[{\]}\\|;:'",<.>/?])+)/g;
+    const regexpPw3 = /\s/g;
+    const regexpPw4 = /[가-힣ㄱ-ㅎㅏ-ㅣ]/g;
+    const regexpPw5 = /(\d)\1\1/g;  
+    대소문자/숫자/특수문자/ 중 2가지 이상 조합,10지~16자
+    입력 가능 특수문자
+    ~`!@#$^()*_-={}[]\;:<>,.''/
+    -공백 입력 불가능
+    -연속된 문자,숫자를 사용 불가능
+    -동일한 문자,숫자를 반복해서 사용 불가능
+    -아이디 포함 불가능
+
+    이메일 제한조건
+    const regexp = /^[A-Za-z0-9가-힣ㄱ-ㅎㅏ-ㅣ`~!#$%^&*\-_=+{}|'?]+((\.)?[A-Za-z가-힣ㄱ-ㅎㅏ-ㅣ0-9`~!#$%^&*\-_=+{}|'?]+)*@[A-Za-z가-힣ㄱ-ㅎㅏ-ㅣ0-9`~!#$%^&*\-_=+{}|'?.]+((\.)?[A-Za-z가-힣ㄱ-ㅎㅏ-ㅣ0-9`~!#$%^&*\-_=+{}|'?.]+)*\.[A-Za-z가-힣ㄱ-ㅎㅏ-ㅣ0-9`~!#$%^&*\-_=+{}|'?]+$/g;
+    가입된 이메일이 있으면 불가능
+    hangten_email_check.php
+    <?
+    include_once('./hangten_header.php');
+
+
+    $sql = "SELECT  userEmail FROM hangten_table";
+    $result = mysqli_query($conn,$sql);
+
+   
+    if(mysqli_num_rows($result)>0){
+        $arr = array();
+        while($row = mysqli_fetch_array($result)){
+            array_push($arr,array(
+                '이메일'     => $row['userEmail']
+            ));
+        }
+    }
+    $json = json_encode($arr, JSON_UNESCAPED_UNICODE);
+    echo $json;
+
+?>
+        회원가입완료 버튼 클릭 전 오류 알림
+        문제없으면 테이블에 내용 저장 + 저장된 아이디 Sub7SignUpOkComponent.jsx 전달
+
+        if(state.아이디===''){
+            alert('아이디를 입력해주세요');
+        }
+        else if(regexpId5.test(state.아이디)===false){
+            alert('아이디는 영문소문자 또는 숫자 4~16자로 입력해 주세요.')
+        }
+        else if(regexpId1.test(state.아이디)===true || regexpId2.test(state.아이디)===true || regexpId3.test(state.아이디)===true || regexpId4.test(state.아이디)===true){
+            alert('대문자/공백/특수문자가 포함되었거나, 숫자로 시작 또는 숫자로만 이루어진 아이디는 사용할 수 없습니다.')
+        }
+        else if(state.비밀번호===''){
+            alert('비밀번호를 입력하세요');
+        }
+        else if(regexpPw1.test(state.비밀번호)===false || regexpPw2.test(state.비밀번호)===false || regexpPw3.test(state.비밀번호)===true || regexpPw4.test(state.비밀번호)===true || regexpPw5.test(state.비밀번호)===true){
+            alert("비밀번호 형식을 다시 한번 확인해 주세요.")
+        }
+        else if(state.비밀번호 !== state.비밀번호확인){
+            alert('비밀번호가 일치하지 않습니다.');
+        }        
+        else if(state.이름===''){
+            alert('이름을 입력하세요');
+        }
+        else if(state.주소1===''){
+            alert('주소를 검색 해주세요');
+        }
+        else if(state.일반전화===''){
+            alert('휴대폰 번호를 입력하세요');
+        }  
+        else if(state.휴대전화===''){
+            alert('휴대폰 번호를 입력하세요');
+        }  
+        else if(state.이메일===''){
+            alert('이메일을 입력하세요');
+        }
+        else if(regexpEmail.test(state.이메일)===false){
+            alert('유효한 이메일을 입력해주세요.');
+        }        
+        else if(state.성별===''){
+            alert('성별을 입력하세요');
+        }        
+        else if(state.생년===''){
+            alert('생년을 입력하세요');
+        }        
+        else if(state.생월===''){
+            alert('생월을 입력하세요');
+        }        
+        else if(state.생일===''){
+            alert('생일을 입력하세요');
+        }        
+        else if(state.지역===''){
+            alert('지역을 입력하세요');
+        }            
+        else if(cnt < 2){
+            alert('이용약관동의 필수 항목을 선택 해주세요');
+        }
+        else { 
+            const formData = new FormData(); 
+            formData.append('userId',       state.아이디);
+            formData.append('userPw',       state.비밀번호);
+            formData.append('userName',     state.이름);
+            formData.append('userEmail',    state.이메일);
+            formData.append('userHp',       state.휴대전화);
+            formData.append('userAddress',  `${state.주소1} ${state.주소2}`);
+            formData.append('userBirth',  `${state.생년}-${state.생월}-${state.생일}`);
+            formData.append('userGender',   state.성별);
+            formData.append('userService',  state.이용약관동의);
+            axios({
+                url: 'http://kkoma1221.dothome.co.kr/hangten/hangten_insert.php',
+                method: 'POST',
+                data: formData  
+            })
+            .then((res)=>{
+                console.log(res)
+                console.log(res.data)
+                if(res.status===200){  
+                    if(res.data===1){
+                        navigate('/sub7SignUpOk',{
+                            state:{
+                                아이디:state.아이디,
+                                이름:state.이름,
+                                이메일:state.이메일
+                            }   
+                        })                         
+                    }   
+                    else if(res.data===0){ 
+                        alert('확인하고 다시 시도해주세요');
+                    }
+                }                              
+            })
+            .catch((err)=>{
+                console.log(`AXIOS 전송 실패! ${err} `);
+            });
+        }
+    -Sub7SignUpOkComponent.jsx  가입완료 창
+
+
+    -Sub8SearchIdComponent.jsx
+    -Sub8SearchIdResultComponent.jsx
+    -Sub8SearchPwComponent.jsx
+    -Sub8SearchPwResultComponent.jsx
+    -Sub9Component.jsx 장바구니
+    -Sub10Component.jsx
+    -Sub11NoticeComponent.jsx
+
