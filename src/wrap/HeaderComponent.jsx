@@ -86,7 +86,7 @@ export default  function HeaderComponent(){
                                     {  selector.signIn.로그인정보!==null &&
                                     <>
                                         <li className="right-list"><Link className="list-btn" to="/sub9">장바구니</Link></li>
-                                        <li className="right-list"><Link className="list-btn" to="#">마이쇼핑</Link></li>
+                                        <li className="right-list"><Link className="list-btn" to="/sub10">마이쇼핑</Link></li>
                                         <li onClick={onClickLogOut} className="right-list"><Link className="list-btn" to="#">로그아웃</Link></li>
                                     </>
                                     }
