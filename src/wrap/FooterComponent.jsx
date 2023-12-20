@@ -37,6 +37,11 @@ export default  function FooterComponent(){
         dispatch(signIn(null));
     }
 
+    const onClickGoMypage=(e)=>{
+        e.preventDefault();
+        navigate('/sub10');
+    }
+
     return(
         <footer id="footer">
             <div className="container">
@@ -95,7 +100,7 @@ export default  function FooterComponent(){
                                     selector.signIn.로그인정보 !== null && (
                                         <ul>
                                             <li><a href="!#" onClick={onClickLogOut}>로그아웃</a></li>
-                                            <li><a href="!#">마이쇼핑</a></li>
+                                            <li><a href="!#" onClick={onClickGoMypage}>마이쇼핑</a></li>
                                         </ul>
                                     )
                                 }

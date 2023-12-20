@@ -24,6 +24,7 @@ import Sub8SearchIdResultComponent from './wrap/sub/Sub8SearchIdResultComponent.
 import Sub8SearchPwResultComponent from "./wrap/sub/Sub8SearchPwResultComponent.jsx";
 import Sub9Component from "./wrap/sub/Sub9Component";
 import Sub10Component from "./wrap/sub/Sub10Component";
+import Sub10MemberInfoComponent from "./wrap/sub/Sub10MemberInfoComponent.jsx";
 import Sub11NoticeComponent from "./wrap/sub/Sub11NoticeComponent.jsx";
 import Sub11NoticeViewComponent from "./wrap/sub/Sub11NoticeViewComponent.jsx";
 import Sub11NoticeInsertComponent from "./wrap/sub/Sub11NoticeInsertComponent.jsx";
@@ -80,6 +81,7 @@ export default function WrapComponent(){
                             <Route path="/sub8SearchPwResult" element={ <Sub8SearchPwResultComponent />} />
                             <Route path="/sub9" element={ <Sub9Component /> }/>
                             <Route path="/sub10" element={ <Sub10Component /> }/>
+                            <Route path="/memberInfo" element={ <Sub10MemberInfoComponent/>} />
                             <Route path="/sub11Notice" element={ <Sub11NoticeComponent /> }/>
                             <Route path="/sub11NoticeView" element={<Sub11NoticeViewComponent />} />
                             <Route path="/sub11NoticeInsert" element={<Sub11NoticeInsertComponent />} />
@@ -87,12 +89,10 @@ export default function WrapComponent(){
                             <Route path="/sub12" element={ <Sub12Component /> }/>
                         </Route>
                     </Routes>
-                        <QuickMenuComponent />
-                        <FooterComponent />
                 </HashRouter>
 
                 <GoTopComponent />
-
+                <QuickMenuComponent />
                 {
                     selector.searchModal.isSearchModal && (<SearchModalComponent />)
                 }
@@ -106,7 +106,7 @@ export default function WrapComponent(){
                     selector.hpconfirmModal.isHpConfirmModal &&
                     <HpComponent />
                 }
-
+                <FooterComponent />
         </div>
     )
 }
