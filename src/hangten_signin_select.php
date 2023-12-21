@@ -10,7 +10,7 @@
 
     if(mysqli_num_rows($res)>0){
         $record = mysqli_fetch_array($res);
-        echo '{"아이디":"'.$record['userId'].'", "이름":"'.$record['userName'].'","이메일":"'.$record['userEmail'].'", "휴대폰":"'.$record['userHp'].'", "주소":"'.$record['userAddress'].'", "생일":"'.$record['userBirth'].'" }';
+        echo '{"아이디":"'.$record['userId'].'", "이름":"'.$record['userName'].'","이메일":"'.$record['userEmail'].'", "휴대폰":"'.$record['userHp'].'", "주소":"'.$record['userAddress'].'", "생일":"'.$record['userBirth'].'", "성별":"'.$record['userGender'].'", "이용약관동의":"'.$record['userService'].'"}';
     }
     else {
         echo 0;

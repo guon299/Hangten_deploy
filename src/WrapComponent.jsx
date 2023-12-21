@@ -89,6 +89,7 @@ export default function WrapComponent(){
                             <Route path="/sub12" element={ <Sub12Component /> }/>
                         </Route>
                     </Routes>
+                    <FooterComponent />
                 </HashRouter>
 
                 <GoTopComponent />
@@ -106,7 +107,7 @@ export default function WrapComponent(){
                     selector.hpconfirmModal.isHpConfirmModal &&
                     <HpComponent />
                 }
-                <FooterComponent />
+
         </div>
     )
 }
