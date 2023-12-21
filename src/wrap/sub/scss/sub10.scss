@@ -44,6 +44,24 @@
                 }
                 .right-box{
                     width: 1500px;
+                    .title {
+                        width: 100%;
+                        padding: 15px 0 40px 0;
+                        line-height: 21px;
+                        display: flex;
+                        align-items: center;
+                        h2 {
+                            font-size: 23px;
+                            color: #222;
+                            font-weight: 500;
+                        }
+                        p {
+                            padding: 0 0 0 15px;
+                            font-size: 15px;
+                            color: #222;
+                            opacity: 0.5;
+                        }
+                    }
                     .personal-info {
                         width: 100%;
                         padding: 10px 0;

@@ -1,9 +1,8 @@
 import React from "react";
 import './scss/Footer.scss';
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { signIn } from "../reducer/signIn";
-
+import { useNavigate } from "react-router-dom";
 
 export default  function FooterComponent(){
 
@@ -36,8 +35,8 @@ export default  function FooterComponent(){
         sessionStorage.removeItem('HANGTEN_SIGNIN_INFORMATION');
         dispatch(signIn(null));
     }
-
-    const onClickGoMypage=(e)=>{
+    
+    const onClickGoMyPage=(e)=>{
         e.preventDefault();
         navigate('/sub10');
     }
@@ -100,7 +99,7 @@ export default  function FooterComponent(){
                                     selector.signIn.로그인정보 !== null && (
                                         <ul>
                                             <li><a href="!#" onClick={onClickLogOut}>로그아웃</a></li>
-                                            <li><a href="!#" onClick={onClickGoMypage}>마이쇼핑</a></li>
+                                            <li><a href="!#" onClick={onClickGoMyPage}>마이쇼핑</a></li>
                                         </ul>
                                     )
                                 }

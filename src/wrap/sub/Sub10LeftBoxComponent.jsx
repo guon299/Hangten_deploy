@@ -1,6 +1,15 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Sub10LeftBoxComponent(){
+
+    const navigate = useNavigate();
+
+    const onClickGoMemberInfo=(e)=>{
+        e.preventDefault();
+        navigate('/memberInfo');
+    }
+
     return (
         <div className="left-box">
             <div className="list-box">
@@ -15,7 +24,7 @@ export default function Sub10LeftBoxComponent(){
                     <li>쿠폰</li>
                     <li>나의 게시물</li>
                     <li className='on'>내 정보관리</li>
-                    <li>회원 정보</li>
+                    <li onClick={onClickGoMemberInfo}>회원 정보</li>
                     <li>배송지 관리</li>
                 </ul>
             </div>

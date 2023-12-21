@@ -2,8 +2,14 @@ import React from 'react';
 import './scss/sub10.scss';
 import Sub10LeftBoxComponent from './Sub10LeftBoxComponent';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { signIn } from '../../reducer/signIn';
 
 export default function Sub10Component() {
+
+    const selector = useSelector((state)=>state);
+    const dispatch = useDispatch();
+
     return (
         <div id='myPage' className='myPage'>
             <section id="sectionSub10" className='section'>
@@ -17,7 +23,7 @@ export default function Sub10Component() {
                                         <img src="./images/sub/sub8/img_member_default.gif" alt="" />
                                     </div>
                                     <div className="info-box">
-                                        <h2>저희 쇼핑몰을 이용해 주셔서 감사합니다. <em>이사랑</em> 님은 <strong>[FAN회원]</strong> 회원이십니다.</h2>
+                                        <h2>저희 쇼핑몰을 이용해 주셔서 감사합니다. <em>{selector.signIn.로그인정보.이름}</em> 님은 <strong>[FAN회원]</strong> 회원이십니다.</h2>
                                         <h2><em>0원 이상</em> 구매시 <em>2%</em>을 추가적립 받으실 수 있습니다. </h2>
                                     </div>
                                 </div>
