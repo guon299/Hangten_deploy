@@ -90,10 +90,9 @@ export default function WrapComponent(){
                         </Route>
                     </Routes>
                     <FooterComponent />
+                    <GoTopComponent />
+                    <QuickMenuComponent />
                 </HashRouter>
-
-                <GoTopComponent />
-                <QuickMenuComponent />
                 {
                     selector.searchModal.isSearchModal && (<SearchModalComponent />)
                 }
