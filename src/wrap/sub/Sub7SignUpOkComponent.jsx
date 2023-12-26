@@ -21,7 +21,7 @@ export default function Sub7SignUpOkComponent() {
             이름:state.이름,
             이메일:state.이메일
         }
-        sessionStorage.setItem('HANGTEN_SIGNIN_INFORMATION',JSON.stringify(로그인정보))
+        localStorage.setItem('HANGTEN_SIGNIN_INFORMATION',JSON.stringify(로그인정보))
         dispatch(signIn(로그인정보))
     },[])
     const onClickOk=(e)=>{

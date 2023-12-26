@@ -1,8 +1,8 @@
 import React from 'react';
 import './scss/QuickMenu.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { isSearchModal } from '../reducer/searchModal';
 import { useNavigate } from 'react-router-dom';
+import { isSearchModal } from '../reducer/searchModal';
 
 export default function QuickMenuComponent(){
 
@@ -18,7 +18,7 @@ export default function QuickMenuComponent(){
 
     const onClickGoNotice=(e)=>{
         e.preventDefault();
-        navigate("/sub11Notice");
+        navigate('/sub11Notice');
     }
 
     React.useEffect(()=>{
@@ -33,7 +33,7 @@ export default function QuickMenuComponent(){
             <div className="container">
                 <ul>
                     <li>
-                        <a href="!#" onClick={onClickGoNotice} ><img src="./images/modal/icon_side_01.png" alt="" /><span>게시판</span></a>
+                        <a href="!#" onClick={onClickGoNotice}><img src="./images/modal/icon_side_01.png" alt="" /><span>게시판</span></a>
                     </li>
                     <li>
                         <a href="!#"><img src="./images/modal/icon_side_03.png" alt="" /><span>행텐</span><span>매장안내</span></a>

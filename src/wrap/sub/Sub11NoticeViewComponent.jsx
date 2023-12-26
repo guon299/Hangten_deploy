@@ -2,14 +2,16 @@ import React from 'react';
 import Sub11NoticeTabMenuComponent from './Sub11NoticeTabMenuComponent.jsx';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './scss/sub11.scss';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
+import { signUpConfirmModal } from '../../reducer/signUpConfirmModal.js';
 
 export default function Sub11NoticeViewComponent(){
 
     const location = useLocation();
     const navigate = useNavigate();
     const selector = useSelector((state)=>state);
+    const dispatch = useDispatch();
 
     const onClickGoList=(e)=>{
         e.preventDefault();
@@ -21,12 +23,23 @@ export default function Sub11NoticeViewComponent(){
         navigate('/sub11NoticeUpdate', {state:location.state});
     }
 
+    const SignUpConfirmModalMethod=(msg)=>{
+        const obj = {
+            signUpIsConfirmModal: true,
+            signUpConfirmMsg: msg,
+            userList:false
+        }
+        dispatch(signUpConfirmModal(obj));
+        const htmlEl = document.getElementsByTagName('html')[0];
+        htmlEl.classList.add('on');
+    }
+
     const onClickDelete=(e)=>{
         e.preventDefault();
         let formData = new FormData();
         formData.append('idx', location.state.번호);
         axios({
-            url: 'https://agnusdeistore.com/hangten/hangten_notice_table_delete.php',
+            url: 'http://kkoma1221.dothome.co.kr/hangten/hangten_notice_table_delete.php',
             method: 'POST',
             data: formData
         })
@@ -34,11 +47,10 @@ export default function Sub11NoticeViewComponent(){
             if(res.status===200){
                 console.log(res.data);
                 if(res.data===1){
-                    alert('공지사항이 삭제되었습니다.');
-                    navigate('/sub11Notice');
+                    SignUpConfirmModalMethod('공지사항을 삭제하시겠습니까?');
                 }
                 else if(res.data===0){
-                    alert('공지사항을 삭제하는데 실패하였습니다.');
+                    SignUpConfirmModalMethod('공지사항을 삭제하는데 실패하였습니다.');
                 }
             }
         })

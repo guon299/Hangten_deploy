@@ -4,7 +4,7 @@ import { Scrollbar }from 'swiper/modules'
 
 export default function Section7ComponentChild({n, slide}) {
 
-    console.log(n);
+    //console.log(n);
     
     return (
         <div className="swiper-container">

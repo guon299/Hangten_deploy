@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signIn } from '../../reducer/signIn';
 import axios from 'axios';
+import { signUpConfirmModal } from '../../reducer/signUpConfirmModal';
 
 export default function Sub8AdminComponent() {
 
@@ -35,9 +36,6 @@ export default function Sub8AdminComponent() {
         e.preventDefault();
         window.history.go(-1);
     }
-
-
-
 
     const onClickSearchIdBtn=(e)=>{
         e.preventDefault();
@@ -105,21 +103,33 @@ export default function Sub8AdminComponent() {
             비밀번호: e.target.value
         });
     }
-    // 회원 onSubtmit 이벤트
+
+    const SignUpConfirmModalMethod=(msg)=>{
+        const obj = {
+            signUpIsConfirmModal: true,
+            signUpConfirmMsg: msg,
+            userList:false
+        }
+        dispatch(signUpConfirmModal(obj));
+        const htmlEl = document.getElementsByTagName('html')[0];
+        htmlEl.classList.add('on');
+    }
+
+    // 관리자 onSubtmit 이벤트
     const onSubmitSignIn=(e)=>{
         e.preventDefault();
         if(state.아이디===''){
-            alert('아이디 항목은 필수 입력값입니다.');
+            SignUpConfirmModalMethod('아이디 항목은 필수 입력값입니다.');
         }
         else if(state.비밀번호===''){
-            alert('패스워드 항목은 필수 입력값입니다.');
+            SignUpConfirmModalMethod('패스워드 항목은 필수 입력값입니다.');
         }
         else {
             let formData = new FormData();
             formData.append('adminId', state.아이디);
             formData.append('adminPw', state.비밀번호);
             axios({
-                url: 'https://agnusdeistore.com/hangten/hangten_admin_table_select.php',
+                url: 'http://kkoma1221.dothome.co.kr/hangten/hangten_admin_table_select.php',
                 method: 'POST',
                 data: formData
             })
@@ -127,7 +137,7 @@ export default function Sub8AdminComponent() {
                 if(res.status===200){
                     //console.log(res.data);
                     if(res.data===0){
-                        alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+                        SignUpConfirmModalMethod('아이디 또는 비밀번호가 일치하지 않습니다.');
                     }
                     else{
                         const 로그인정보 = {

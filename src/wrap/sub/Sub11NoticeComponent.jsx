@@ -39,7 +39,7 @@ export default function Sub11NoticeComponent() {
 
     React.useEffect(()=>{
         axios({
-            url: 'https://agnusdeistore.com/hangten/hangten_notice_table_select.php',
+            url: 'http://kkoma1221.dothome.co.kr/hangten/hangten_notice_table_select.php',
             method: 'GET'
         })
         .then((res)=>{
