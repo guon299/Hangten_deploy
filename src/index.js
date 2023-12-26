@@ -24,6 +24,7 @@ import confirmModal from './reducer/confirmModal.js';
 import hpconfirmModal from './reducer/hpConfirmModal.js';
 import signIn from './reducer/signIn.js';
 import hpsignDate from './reducer/hpsignDate.js';
+import signUpConfirmModal from './reducer/signUpConfirmModal.js';
 
 let store = configureStore({
   reducer: {
@@ -47,7 +48,8 @@ let store = configureStore({
     confirmModal,
     signIn,
     hpconfirmModal,
-    hpsignDate
+    hpsignDate,
+    signUpConfirmModal
   }
 });
 

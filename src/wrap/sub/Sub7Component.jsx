@@ -1,6 +1,6 @@
 import React from 'react';
 import Sub7ComponentChild from './Sub7ComponentChild'
-import '../sub/scss/sub7.scss'
+import './scss/sub7.scss'
 
 export default function Sub7Component() {
     return (

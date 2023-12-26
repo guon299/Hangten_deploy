@@ -2,10 +2,13 @@ import React from 'react';
 import './scss/sub8SearchIdPw.scss';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { signUpConfirmModal } from '../../reducer/signUpConfirmModal';
 
 export default function Sub8SearchIdComponent() {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [state, setState] = React.useState({
         아이디: '',
@@ -133,21 +136,33 @@ export default function Sub8SearchIdComponent() {
         }
     },[state.등록번호1, state.등록번호2]);
 
+    const SignUpConfirmModalMethod=(msg)=>{
+        const obj = {
+            signUpIsConfirmModal: true,
+            signUpConfirmMsg: msg,
+            userList:false
+        }
+        dispatch(signUpConfirmModal(obj));
+
+        const htmlEl = document.getElementsByTagName('html')[0];
+        htmlEl.classList.add('on');
+    }
+
     const onSubmitSearchIdForm=(e)=>{
         e.preventDefault();
         if(state.isValue==='이메일'){
             if(state.이름===''){
-                alert('이름을 입력하세요.');
+                SignUpConfirmModalMethod('이름을 입력하세요.');
             }
             else if(state.이메일===''){
-                alert('이메일을 입력하세요.');
+                SignUpConfirmModalMethod('이메일을 입력하세요.');
             }
             else {
                 let formData = new FormData();
                 formData.append('userName', state.이름);
                 formData.append('userEmail', state.이메일);
                 axios({
-                    url: 'https://agnusdeistore.com/hangten/hangten_search_id_name_email_select.php',
+                    url: 'http://kkoma1221.dothome.co.kr/hangten/hangten_search_id_name_email_select.php',
                     method: 'POST',
                     data: formData
                 })
@@ -164,7 +179,7 @@ export default function Sub8SearchIdComponent() {
                             // navigate('/sub8SearchIdResult');
                         }
                         else {
-                            alert('입력하신 정보로 가입 된 회원 아이디는 존재하지 않습니다.');
+                            SignUpConfirmModalMethod('입력하신 정보로 가입 된 회원 아이디는 존재하지 않습니다.');
                         }
                     }
                 })
@@ -175,17 +190,17 @@ export default function Sub8SearchIdComponent() {
         }
         else if(state.isValue==='휴대폰번호'){
             if(state.이름===''){
-                alert('이름을 입력하세요.');
+                SignUpConfirmModalMethod('이름을 입력하세요.');
             }
             else if(state.휴대폰===''){
-                alert('휴대폰번호를 입력하세요.');
+                SignUpConfirmModalMethod('휴대폰번호를 입력하세요.');
             }
             else{
                 let formData = new FormData();
                 formData.append('userName', state.이름);
                 formData.append('userHp', state.휴대폰);
                 axios({
-                    url: 'https://agnusdeistore.com/hangten/hangten_search_id_name_hp_select.php',
+                    url: 'http://kkoma1221.dothome.co.kr/hangten/hangten_search_id_name_hp_select.php',
                     method: 'POST',
                     data: formData
                 })
@@ -201,7 +216,7 @@ export default function Sub8SearchIdComponent() {
                             });
                         }
                         else {
-                            alert('입력하신 정보로 가입 된 회원 아이디는 존재하지 않습니다.');
+                            SignUpConfirmModalMethod('입력하신 정보로 가입 된 회원 아이디는 존재하지 않습니다.');
                         }
                     }
                 })
