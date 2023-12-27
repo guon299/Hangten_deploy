@@ -59,7 +59,7 @@ export default function WrapComponent(){
 
     return (
         <div id="wrap">
-                <BrowserRouter basename={process.env.PUBLIC_URL}>
+                <HashRouter>
                     <Routes>
                         <Route path="/" element={<HeaderComponent />}>
                             <Route index element={ <MainComponent /> } />                        
@@ -97,7 +97,7 @@ export default function WrapComponent(){
                     selector.signUpConfirmModal.signUpIsConfirmModal &&
                         <SignUpConfirmModalComponent/>
                     }
-                </BrowserRouter>
+                </HashRouter>
                 {
                     selector.searchModal.isSearchModal && (<SearchModalComponent />)
                 }
