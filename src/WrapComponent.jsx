@@ -33,6 +33,7 @@ import Sub12Component from "./wrap/sub/Sub12Component";
 import FooterComponent from './wrap/FooterComponent';
 import SearchModalComponent from "./wrap/SearchModalComponent";
 import HpComponent from './wrap/HpComponent'
+import ProductViewComponent from "./wrap/ProductViewComponent.jsx";
 import { useSelector, useDispatch } from "react-redux";
 import { isSearchModal } from "./reducer/searchModal";
 import { signIn } from "./reducer/signIn";
@@ -87,6 +88,8 @@ export default function WrapComponent(){
                             <Route path="/sub11NoticeInsert" element={<Sub11NoticeInsertComponent />} />
                             <Route path="/sub11NoticeUpdate" element={<Sub11NoticeUpdateComponent />} />
                             <Route path="/sub12" element={ <Sub12Component /> }/>
+
+                            <Route path="/productView" element={ <ProductViewComponent /> }/>
                         </Route>
                     </Routes>
                     <FooterComponent />

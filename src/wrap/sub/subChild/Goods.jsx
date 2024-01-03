@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { goodsPage } from "../../../reducer/goodsPageReducer";
 import { displayViewGoods } from "../../../reducer/viewGoodsReducer";
@@ -20,6 +20,7 @@ export default function Goods() {
     const dispatch = useDispatch();
     const selector = useSelector((state)=>state);
     const navigate = useNavigate();
+    const location = useLocation()
 
     const [state, setState] = React.useState({
         isSubBtnAll:true
@@ -37,6 +38,8 @@ export default function Goods() {
 
     // 처음 로딩시 상품데이터 불러오기
     React.useEffect(()=>{
+        let subClick = location.state;
+        console.log(subClick);
         axios({
             url:'./data/Goods.json',
             method:'GET'
@@ -107,7 +110,7 @@ export default function Goods() {
         else{
             cnt=selector.currentPageIn.currentPage+1;
             dispatch(currentPageIn(cnt));
-            console.log(cnt);
+            // console.log(cnt);
         }
     };
 
@@ -167,6 +170,12 @@ export default function Goods() {
         e.preventDefault();
         dispatch(isSubMeun3In(cnt));
     };
+
+    const onClickProductView=(e, item)=>{
+        e.preventDefault();
+        navigate('/productView',{state:item});
+        console.log(item);
+    }
 
     return (
         <div className="content-box">
@@ -252,13 +261,13 @@ export default function Goods() {
                                 
                                 <li key={item.GoodsNum}>
                                     <div className="img-box">
-                                        <a href="!#">
+                                        <a href="!#" onClick={(e)=>onClickProductView(e, item)}>
                                             <img src={`./images/Goods/${item.이미지}`} alt="" />
                                         </a>
                                     </div>
                                     <div className="text-box">
                                         <div className="text1">
-                                            <a href="!#">{item.GoodsName}</a>
+                                            <a href="!#" onClick={onClickProductView}>{item.GoodsName}</a>
                                         </div>
                                         <div className="text2">
                                             <h2>{Math.round(item.할인률*100)}%</h2>

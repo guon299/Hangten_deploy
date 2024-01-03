@@ -9,7 +9,6 @@ const viewGoodsReducer = createSlice({
     initialState:initState,
     reducers:{
         displayViewGoods:(state, action)=>{
-            console.log(action);
             state.viewGoods = action.payload
         }
     }

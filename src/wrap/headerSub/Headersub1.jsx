@@ -1,8 +1,15 @@
 import React from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+// import { clickSubMeun } from '../../reducer/subClickReducer';
+import { isSubMeun1In } from '../../reducer/isSubMeun1Reducer.js';
 
 export default function Headersub1() {
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [state, setState] = React.useState({
         isNewSub:false,
@@ -46,17 +53,29 @@ export default function Headersub1() {
             });
         },0)
     }
+
+    const onClickSub = (e)=>{
+        e.preventDefault();
+        dispatch(isSubMeun1In(''));
+        navigate("/sub1");
+    }
+
+    const onCLickSubTab=(e, idx)=>{
+        e.preventDefault();
+        dispatch(isSubMeun1In(idx));
+        navigate("/sub1");
+    }
     return (
 
         <li className={`navBtn-li${state.isNewSub===true?' on':''}`} onMouseEnter={onMouseEnterNew} onMouseLeave={onMouseLeaveNew}>
-            <Link className="nav-meun" to="/sub1" >신상품</Link>
-            <div className="sub-meun new" onMouseEnter={onMouseEnterNew} onMouseLeave={onMouseLeaveNew}>
+            <a className="nav-meun" href="!#" onClick={onClickSub}>신상품</a>
+            <div className="sub-meun new" onMouseLeave={onMouseLeaveNew}>
                 <ul className="sub-wrap">
                     {
                         state.headNavi.map((item,idx)=>{
                             return(
                                 <li className="sub-list" key={idx}>
-                                    <Link className="sub-tap" to="/sub1">{item.submeun}</Link>
+                                    <a className="sub-tap" href="!#" onClick={(e)=>onCLickSubTab(e,idx)}>{item.submeun}</a>
                                 </li>
                             )
                         })
