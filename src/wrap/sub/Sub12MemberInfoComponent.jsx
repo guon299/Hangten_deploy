@@ -1,15 +1,20 @@
 import React from 'react';
-import './scss/sub10.scss';
-import './scss/sub10MemberInfo.scss';
-import Sub10LeftBoxComponent from './Sub10LeftBoxComponent.jsx';
+import './scss/sub12.scss';
+import './scss/sub12MemberInfo.scss';
+import Sub12LeftBoxComponent from './Sub12LeftBoxComponent.jsx';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { isAddress } from '../../reducer/isAddress';
 import { signIn } from '../../reducer/signIn';
+import { signUpConfirmModal } from '../../reducer/signUpConfirmModal';
+import axios from 'axios';
 
-export default function Sub10MemberInfoComponent() {
+
+export default function Sub12MemberInfoComponent() {
 
     const selector = useSelector((state)=>state);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [state,setState] = React.useState({
         아이디: '',
@@ -32,9 +37,13 @@ export default function Sub10MemberInfoComponent() {
         SMS수신여부: '',
         이메일수신여부: '',
         이용약관동의:[],
+    });
+
+    const [guide, setGuide] = React.useState({
         idGuidText:'',
         IsidGuidText:false,
         Pw2GuidText:'',
+        Hp2GuideText: '',
         emailGuidText:'',
         IsEmailGuidText:false,
         isPw1Guid:false
@@ -43,6 +52,7 @@ export default function Sub10MemberInfoComponent() {
     React.useEffect(()=>{
         if(selector.signIn.로그인정보!==null){
             setState({
+                ...state,
                 아이디: selector.signIn.로그인정보.아이디,
                 이름: selector.signIn.로그인정보.이름,
                 휴대전화: selector.signIn.로그인정보.휴대폰,
@@ -69,15 +79,15 @@ export default function Sub10MemberInfoComponent() {
     }
 
     const onFocusPw1=(e)=>{
-        setState({
-            ...state,
+        setGuide({
+            ...guide,
             isPw1Guid: true
         })
     }
 
     const onBlurPw1=(e)=>{
-        setState({
-            ...state,
+        setGuide({
+            ...guide,
             isPw1Guid: false
         })
     }
@@ -93,8 +103,11 @@ export default function Sub10MemberInfoComponent() {
         setState({
             ...state,
             비밀번호확인: e.target.value,
-            Pw2GuidText: Pw2GuidText
         })
+        setGuide({
+            ...guide,
+            Pw2GuidText: Pw2GuidText
+        });
     }
 
     const onClickAddress=(e)=>{
@@ -110,10 +123,18 @@ export default function Sub10MemberInfoComponent() {
     }
 
     const onChangeHp2=(e)=>{
+        let Hp2GuideText = '';
+        if(state.휴대전화===''){
+            Hp2GuideText = '휴대폰 번호를 입력하세요.'
+        }
         setState({
             ...state,
-            휴대전화: e.target.value
-        })
+            휴대전화: e.target.value,
+        });
+        setGuide({
+            ...guide,
+            Hp2GuideText: Hp2GuideText
+        });
     }
 
     const onChangeGender=(e)=>{
@@ -150,6 +171,19 @@ export default function Sub10MemberInfoComponent() {
             SMS수신여부: e.target.value
         });
     }
+    React.useMemo(()=>{
+        let 이용약관동의 = state.이용약관동의;
+        if(state.SMS수신여부==='수신함'){
+            이용약관동의 = [...state.이용약관동의, '동의함4'];
+        }
+        else if(state.SMS수신여부==='수신안함'){
+            이용약관동의 = 이용약관동의.filter((item)=>item !== '동의함4');
+        }
+        setState({
+            ...state,
+            이용약관동의: 이용약관동의
+        });
+    },[state.SMS수신여부]);
 
     const onChangeEmail=(e)=>{
         const {value} = e.target;
@@ -173,8 +207,11 @@ export default function Sub10MemberInfoComponent() {
         setState({
             ...state,
             이메일: value,
+        });
+        setGuide({
+            ...guide,
             emailGuidText: emailGuidText,
-            IsEmailGuidText:IsEmailGuidText
+            IsEmailGuidText: IsEmailGuidText
         });
     }
 
@@ -185,12 +222,25 @@ export default function Sub10MemberInfoComponent() {
         });
     }
 
+    React.useMemo(()=>{
+        let 이용약관동의 = state.이용약관동의;
+        if(state.이메일수신여부==='수신함'){
+            이용약관동의 = [...state.이용약관동의, '동의함5'];
+        }
+        else if(state.이메일수신여부==='수신안함'){
+            이용약관동의 = 이용약관동의.filter((item)=> item !== '동의함5');
+        }
+        setState({
+            ...state,
+            이용약관동의: 이용약관동의
+        });
+    },[state.이메일수신여부]);
 
     const onChangeService=(e)=>{
         let 이용약관동의 = state.이용약관동의;
         //console.log(selector.signIn.로그인정보.이용약관동의);
         if(e.target.checked===true){
-            console.log((state.이용약관동의));
+            // console.log((state.이용약관동의));
             이용약관동의 = [...state.이용약관동의, e.target.value]
         }
         else {
@@ -201,7 +251,69 @@ export default function Sub10MemberInfoComponent() {
             ...state,
             이용약관동의: 이용약관동의
         });
+    }
 
+    const SignUpConfirmModalMethod=(msg)=>{
+        const obj = {
+            signUpIsConfirmModal: true,
+            signUpConfirmMsg: msg,
+            userList:false
+        }
+        dispatch(signUpConfirmModal(obj));
+        const htmlEl = document.getElementsByTagName('html')[0];
+        htmlEl.classList.add('on');
+    }
+
+    const onSubmitMemberInfoUpdate=(e)=>{
+        e.preventDefault();
+        if(state.비밀번호==='' || state.비밀번호확인===''){
+            SignUpConfirmModalMethod('비밀번호 항목은 필수 입력값입니다.');
+        }
+        else if(state.휴대전화===''){
+            SignUpConfirmModalMethod('올바른 휴대전화번호를 입력하세요.');
+        }
+        else if(state.이메일===''){
+            SignUpConfirmModalMethod('이메일을 입력하세요.');
+        }
+        else if(state.생년==='' || state.생월==='' || state.생일===''){
+            SignUpConfirmModalMethod('생년월일 항목은 필수 입력값입니다.');
+        }
+        else {
+            let formData = new FormData();
+            formData.append('userId', state.아이디);
+            formData.append('userPw', state.비밀번호);
+            formData.append('userName', state.이름);
+            formData.append('userAddress', `${state.주소1}) ${state.주소2}`);
+            formData.append('userHp', state.휴대전화);
+            formData.append('userEmail', state.이메일);
+            formData.append('userGender', state.성별);
+            formData.append('userBirth', `${state.생년}-${state.생월}-${state.생일}`);
+            formData.append('userService', state.이용약관동의);
+            axios({
+                url: 'http://kkoma1221.dothome.co.kr/hangten/hangten_user_info_update.php',
+                method: 'POST',
+                data: formData
+            })
+            .then((res)=>{
+                if(res.status===200){
+                    console.log(res.data);
+                    if(res.data !== ''){
+                        SignUpConfirmModalMethod('회원정보를 수정하시겠습니까?');
+                    }
+                    else if(res.data === ''){
+                        SignUpConfirmModalMethod('회원정보를 수정하는데 실패하였습니다. 확인하고 다시 시도하세요.');
+                    }
+                }
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+        }
+    }
+
+    const onClickCancelBtn=(e)=>{
+        e.preventDefault();
+        navigate('/index');
     }
 
     return (
@@ -209,7 +321,7 @@ export default function Sub10MemberInfoComponent() {
             <section id='sectionSub10Info' className='section'>
                 <div className="container">
                     <div className="content">
-                        <Sub10LeftBoxComponent />
+                        <Sub12LeftBoxComponent />
                         <div className="right-box">
                             <div className="title">
                                 <h2>회원 정보</h2>
@@ -227,7 +339,7 @@ export default function Sub10MemberInfoComponent() {
                                 </div>
                             </div>
                             <div className="info-update">
-                                <form>
+                                <form onSubmit={onSubmitMemberInfoUpdate}>
                                     <div className="signUp-box">
                                         <div className="signUp-title">
                                             <h3>기본정보</h3>
@@ -253,7 +365,6 @@ export default function Sub10MemberInfoComponent() {
                                                         </div>
                                                     </div>
                                                 </li>
-
                                                 <li>
                                                     <div className="list-box">
                                                         <div className="left-box">
@@ -311,7 +422,7 @@ export default function Sub10MemberInfoComponent() {
                                                                 value={state.비밀번호확인}
                                                                 maxLength={16}
                                                             />
-                                                            <p className='guid-text'>{state.Pw2GuidText}</p>
+                                                            <p className='guid-text'>{guide.Pw2GuidText}</p>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -384,7 +495,7 @@ export default function Sub10MemberInfoComponent() {
                                                         </div>
                                                         <div className="input-box">
                                                             <input 
-                                                            autoComplete='none'
+                                                                autoComplete='none'
                                                                 type="text" 
                                                                 name='userHp2' 
                                                                 id='userHp2' 
@@ -392,6 +503,7 @@ export default function Sub10MemberInfoComponent() {
                                                                 value={state.휴대전화}
                                                                 maxLength={11}
                                                             />
+                                                            <p className='guid-text'>{guide.Hp2GuideText}</p>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -644,7 +756,7 @@ export default function Sub10MemberInfoComponent() {
                                     </div>
                                     <div className="button-box">
                                         <button type='submit' className='update-btn'>회원정보수정</button>
-                                        <button className='cancel-btn'>취소</button>
+                                        <button onClick={onClickCancelBtn} className='cancel-btn'>취소</button>
                                     </div>
                                 </form>
                             </div>

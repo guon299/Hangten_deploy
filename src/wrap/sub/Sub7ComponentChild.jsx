@@ -16,7 +16,7 @@ export default function Sub7ComponentChild() {
 
     // React.useEffect(()=>{
     //     axios({
-    //         url:'https://answotlr12.dothome.co.kr/hangten/hangten_email_check.php',
+    //         url:'http://answotlr12.dothome.co.kr/hangten/hangten_email_check.php',
     //         method:'GET'
     //     })
     //     .then((result)=>{

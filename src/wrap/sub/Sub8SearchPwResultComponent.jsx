@@ -2,11 +2,14 @@ import React from 'react';
 import './scss/sub8SearchIdPwResult.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { signUpConfirmModal } from '../../reducer/signUpConfirmModal';
 
 export default function Sub8SearchPwResultComponent(){
     
     const navigate = useNavigate();
     const location = useLocation();
+    const dispatch = useDispatch();
 /*  console.log(location);
     console.log(location.state.아이디);
     console.log(location.state.이름);
@@ -73,10 +76,20 @@ export default function Sub8SearchPwResultComponent(){
         });
     }
 
+    const SignUpConfirmModalMethod=(msg)=>{
+        const obj = {
+            signUpIsConfirmModal: true,
+            signUpConfirmMsg: msg,
+            userList:false
+        }
+        dispatch(signUpConfirmModal(obj));
+        const htmlEl = document.getElementsByTagName('html')[0];
+        htmlEl.classList.add('on');
+    }
+
     const onClickOkBtn=(e)=>{
         e.preventDefault();
-        alert('임시 비밀번호를 전송하였습니다. 확인하고 로그인하세요.');
-        navigate('/sub8');
+        SignUpConfirmModalMethod('임시 비밀번호를 전송하였습니다. 확인하고 로그인하세요.');
     }
 
     const onClickCancelBtn=(e)=>{
@@ -87,13 +100,13 @@ export default function Sub8SearchPwResultComponent(){
     const onSubmitPwReset=(e)=>{
         e.preventDefault();
         if(state.새비밀번호1===''){
-            alert('새비밀번호를 입력해주세요');
+            SignUpConfirmModalMethod('새비밀번호를 입력해주세요');
         }
         else if(state.새비밀번호2===''){
-            alert('새비밀번호를 한 번 더 입력해주세요.');
+            SignUpConfirmModalMethod('새비밀번호를 한 번 더 입력해주세요.');
         }
         else if(state.새비밀번호1!==state.새비밀번호2){
-            alert('비밀번호가 일치하지 않습니다. 확인하고 다시 시도하세요.');
+            SignUpConfirmModalMethod('비밀번호가 일치하지 않습니다. 확인하고 다시 시도하세요.');
         }
         else{
             if(location.state.이메일!=='' && location.state.휴대폰===''){
@@ -102,7 +115,7 @@ export default function Sub8SearchPwResultComponent(){
                 formData.append('userEmail', state.이메일);
                 formData.append('userPw', state.새비밀번호1);
                 axios({
-                    url: 'https://agnusdeistore.com/hangten/hangten_pw_email_update.php',
+                    url: 'http://kkoma1221.dothome.co.kr/hangten/hangten_pw_email_update.php',
                     method: 'POST',
                     data: formData
                 })
@@ -110,11 +123,10 @@ export default function Sub8SearchPwResultComponent(){
                     if(res.status===200){
                         // console.log(res.data);
                         if(res.data===1){
-                            alert('비밀번호가 변경되었습니다!');
-                            navigate('/sub8');
+                            SignUpConfirmModalMethod('비밀번호를 변경하시겠습니까?');
                         }
                         else if(res.data===0){
-                            alert('다시 확인하고 시도하세요.');
+                            SignUpConfirmModalMethod('다시 확인하고 시도하세요.');
                         }
                     }
                 })
@@ -128,7 +140,7 @@ export default function Sub8SearchPwResultComponent(){
                 formData.append('userHp', state.휴대폰);
                 formData.append('userPw', state.새비밀번호1);
                 axios({
-                    url: 'https://agnusdeistore.com/hangten/hangten_pw_hp_update.php',
+                    url: 'http://kkoma1221.dothome.co.kr/hangten/hangten_pw_hp_update.php',
                     method: 'POST',
                     data: formData
                 })
@@ -136,11 +148,10 @@ export default function Sub8SearchPwResultComponent(){
                     if(res.status===200){
                         console.log(res.data);
                         if(res.data===1){
-                            alert('비밀번호가 변경되었습니다!');
-                            navigate('/sub8');
+                            SignUpConfirmModalMethod('비밀번호를 변경하시겠습니까?');
                         }
                         else if(res.data===0){
-                            alert('다시 확인하고 시도하세요.');
+                            SignUpConfirmModalMethod('다시 확인하고 시도하세요.');
                         }
                     }
                 })

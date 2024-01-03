@@ -3,11 +3,14 @@ import Sub11NoticeTabMenuComponent from './Sub11NoticeTabMenuComponent.jsx';
 import './scss/sub11.scss';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { signUpConfirmModal } from '../../reducer/signUpConfirmModal.js';
 
 export default function Sub11NoticeUpdateComponent(){
 
     const navigate = useNavigate();
     const location = useLocation();
+    const dispatch = useDispatch();
 
     const [state, setState] = React.useState({
         번호: '',
@@ -43,13 +46,24 @@ export default function Sub11NoticeUpdateComponent(){
         });
     }
 
+    const SignUpConfirmModalMethod=(msg)=>{
+        const obj = {
+            signUpIsConfirmModal: true,
+            signUpConfirmMsg: msg,
+            userList:false
+        }
+        dispatch(signUpConfirmModal(obj));
+        const htmlEl = document.getElementsByTagName('html')[0];
+        htmlEl.classList.add('on');
+    }
+
     const onSubmitInsertForm=(e)=>{
         e.preventDefault();
         if(state.제목===''){
-            alert('제목을 입력해주세요');
+            SignUpConfirmModalMethod('제목을 입력해주세요');
         }
         else if(state.내용===''){
-            alert('내용을 입력해주세요');
+            SignUpConfirmModalMethod('내용을 입력해주세요');
         }
         else {
             let formData = new FormData();
@@ -59,7 +73,7 @@ export default function Sub11NoticeUpdateComponent(){
             formData.append('nId', state.아이디);
             formData.append('nContent', state.내용);
             axios({
-                url: 'https://agnusdeistore.com/hangten/hangten_notice_table_update.php',
+                url: 'http://kkoma1221.dothome.co.kr/hangten/hangten_notice_table_update.php',
                 method: 'POST',
                 data: formData
             })
@@ -67,11 +81,10 @@ export default function Sub11NoticeUpdateComponent(){
                 if(res.status===200){
                     console.log(res.data);
                     if(res.data===1){
-                        alert('공지사항이 수정되었습니다.');
-                        navigate('/sub11Notice');
+                        SignUpConfirmModalMethod('공지사항을 수정하시겠습니까?');
                     }
                     else if(res.data===0){
-                        alert('공지사항 수정에 실패하였습니다. 확인하고 다시 시도하세요');
+                        SignUpConfirmModalMethod('공지사항 수정에 실패하였습니다. 확인하고 다시 시도하세요');
                     }
                 }
             })

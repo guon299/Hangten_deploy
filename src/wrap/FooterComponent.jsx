@@ -38,7 +38,7 @@ export default  function FooterComponent(){
     
     const onClickGoMyPage=(e)=>{
         e.preventDefault();
-        navigate('/sub10');
+        navigate('/sub12');
     }
 
     return(

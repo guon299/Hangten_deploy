@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-export default function Sub10LeftBoxComponent(){
+export default function Sub12LeftBoxComponent(){
 
     const navigate = useNavigate();
 

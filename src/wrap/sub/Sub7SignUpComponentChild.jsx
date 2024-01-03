@@ -6,6 +6,7 @@ import { isAddress } from '../../reducer/isAddress';
 import { useNavigate,useLocation } from 'react-router-dom';
 import { hpconfirmModal } from '../../reducer/hpConfirmModal';
 import { hpsignDate } from '../../reducer/hpsignDate'
+import { signUpConfirmModal } from '../../reducer/signUpConfirmModal';
 
 export default function Sub7SignUpComponentChild() {
 
@@ -63,7 +64,7 @@ export default function Sub7SignUpComponentChild() {
     
     React.useEffect(()=>{
         axios({
-            url:'https://answotlr12.dothome.co.kr/hangten/hangten_email_check.php',
+            url:'http://answotlr12.dothome.co.kr/hangten/hangten_email_check.php',
             method:'GET'
         })
         .then((result)=>{
@@ -87,7 +88,7 @@ export default function Sub7SignUpComponentChild() {
 
     React.useEffect(()=>{
         axios({
-            url:'https://answotlr12.dothome.co.kr/hangten/hangten_id_check.php',
+            url:'http://answotlr12.dothome.co.kr/hangten/hangten_id_check.php',
             method:'GET'
         })
         .then((res)=>{
@@ -109,6 +110,18 @@ export default function Sub7SignUpComponentChild() {
         })
         return;
     },[state.이메일중복])
+
+    const SignUpConfirmModalMethod=(msg)=>{
+        const obj = {
+            signUpIsConfirmModal: true,
+            signUpConfirmMsg: msg,
+            userList:false
+        }
+        dispatch(signUpConfirmModal(obj));
+
+        const htmlEl = document.getElementsByTagName('html')[0];
+        htmlEl.classList.add('on');
+    }
 
     const onChangeId=(e)=>{
         const   {value} = e.target;
@@ -337,64 +350,64 @@ export default function Sub7SignUpComponentChild() {
             }
         });
         if(state.아이디===''){
-            alert('아이디를 입력해주세요');
+            SignUpConfirmModalMethod('아이디를 입력해주세요');
         }
         else if(regexpId5.test(state.아이디)===false){
-            alert('아이디는 영문소문자 또는 숫자 4~16자로 입력해 주세요.')
+            SignUpConfirmModalMethod('아이디는 영문소문자 또는 숫자 4~16자로 입력해 주세요.')
         }
         else if(regexpId1.test(state.아이디)===true || regexpId2.test(state.아이디)===true || regexpId3.test(state.아이디)===true || regexpId4.test(state.아이디)===true || regexpId6.test(state.아이디)===true || regexpId7.test(state.아이디)===false){
-            alert('대문자/공백/특수문자가 포함되었거나, 숫자로 시작 또는 숫자로만 이루어진 아이디는 사용할 수 없습니다.')
+            SignUpConfirmModalMethod('대문자/공백/특수문자가 포함되었거나, 숫자로 시작 또는 숫자로만 이루어진 아이디는 사용할 수 없습니다.')
         }
         else if(state.아이디중복.includes(state.아이디)===true){
-            alert('이미 가입된 아이디입니다.')
+            SignUpConfirmModalMethod('이미 가입된 아이디입니다.')
         }
         else if(state.비밀번호===''){
-            alert('비밀번호를 입력하세요');
+            SignUpConfirmModalMethod('비밀번호를 입력하세요');
         }
         else if(regexpPw1.test(state.비밀번호)===false || regexpPw2.test(state.비밀번호)===false || regexpPw3.test(state.비밀번호)===true || regexpPw4.test(state.비밀번호)===true || regexpPw5.test(state.비밀번호)===true || regexpPw6.test(state.비밀번호)===true ){
-            alert("비밀번호 형식을 다시 한번 확인해 주세요.")
+            SignUpConfirmModalMethod("비밀번호 형식을 다시 한번 확인해 주세요.")
         }
         else if(state.비밀번호 !== state.비밀번호확인){
-            alert('비밀번호가 일치하지 않습니다.');
+            SignUpConfirmModalMethod('비밀번호가 일치하지 않습니다.');
         }        
         else if(state.이름===''){
-            alert('이름을 입력하세요');
+            SignUpConfirmModalMethod('이름을 입력하세요');
         }
         else if(state.주소1===''){
-            alert('주소를 검색 해주세요');
+            SignUpConfirmModalMethod('주소를 검색 해주세요');
         }
         else if(state.일반전화===''){
-            alert('휴대폰 번호를 입력하세요');
+            SignUpConfirmModalMethod('휴대폰 번호를 입력하세요');
         }  
         else if(state.휴대전화===''){
-            alert('휴대폰 번호를 입력하세요');
+            SignUpConfirmModalMethod('휴대폰 번호를 입력하세요');
         }  
         else if(state.이메일===''){
-            alert('이메일을 입력하세요');
+            SignUpConfirmModalMethod('이메일을 입력하세요');
         }
         else if(state.이메일중복.includes(state.이메일)===true){
-            alert('이미 가입된 이메일입니다.');
+            SignUpConfirmModalMethod('이미 가입된 이메일입니다.');
         }
         else if(regexpEmail.test(state.이메일)===false){
-            alert('유효한 이메일을 입력해주세요.');
+            SignUpConfirmModalMethod('유효한 이메일을 입력해주세요.');
         }        
         else if(state.성별===''){
-            alert('성별을 입력하세요');
+            SignUpConfirmModalMethod('성별을 입력하세요');
         }        
         else if(state.생년===''){
-            alert('생년을 입력하세요');
+            SignUpConfirmModalMethod('생년을 입력하세요');
         }        
         else if(state.생월===''){
-            alert('생월을 입력하세요');
+            SignUpConfirmModalMethod('생월을 입력하세요');
         }        
         else if(state.생일===''){
-            alert('생일을 입력하세요');
+            SignUpConfirmModalMethod('생일을 입력하세요');
         }        
         else if(state.지역===''){
-            alert('지역을 입력하세요');
+            SignUpConfirmModalMethod('지역을 입력하세요');
         }            
         else if(cnt < 2){
-            alert('이용약관동의 필수 항목을 선택 해주세요');
+            SignUpConfirmModalMethod('이용약관동의 필수 항목을 선택 해주세요');
         }
         else { 
             const formData = new FormData(); 
@@ -408,13 +421,13 @@ export default function Sub7SignUpComponentChild() {
             formData.append('userGender',   state.성별);
             formData.append('userService',  state.이용약관동의);
             axios({
-                url: 'https://answotlr12.dothome.co.kr/hangten/hangten_insert.php',
+                url: 'http://answotlr12.dothome.co.kr/hangten/hangten_insert.php',
                 method: 'POST',
                 data: formData  
             })
             .then((res)=>{
-                console.log(res)
-                console.log(res.data)
+                // console.log(res)
+                // console.log(res.data)
                 if(res.status===200){  
                     if(res.data===1){
                         navigate('/sub7SignUpOk',{
@@ -426,7 +439,7 @@ export default function Sub7SignUpComponentChild() {
                         })                         
                     }   
                     else if(res.data===0){ 
-                        alert('확인하고 다시 시도해주세요');
+                        SignUpConfirmModalMethod('확인하고 다시 시도해주세요');
                     }
                 }                              
             })

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signIn } from '../../reducer/signIn';
 import { confirmModal } from '../../reducer/confirmModal';
+import { signUpConfirmModal } from '../../reducer/signUpConfirmModal';
 import axios from 'axios';
 
 export default function Sub8Component() {
@@ -192,21 +193,33 @@ export default function Sub8Component() {
         });
     }
 
+    const SignUpConfirmModalMethod=(msg)=>{
+        const obj = {
+            signUpIsConfirmModal: true,
+            signUpConfirmMsg: msg,
+            userList:false
+        }
+        dispatch(signUpConfirmModal(obj));
+
+        const htmlEl = document.getElementsByTagName('html')[0];
+        htmlEl.classList.add('on');
+    }
+
     // 회원 onSubtmit 이벤트
     const onSubmitSignIn=(e)=>{
         e.preventDefault();
         if(state.아이디===''){
-            alert('아이디 항목은 필수 입력값입니다.');
+            SignUpConfirmModalMethod('아이디 항목은 필수 입력값입니다.');
         }
         else if(state.비밀번호===''){
-            alert('패스워드 항목은 필수 입력값입니다.');
+            SignUpConfirmModalMethod('패스워드 항목은 필수 입력값입니다.');
         }
         else {
             let formData = new FormData();
             formData.append('userId', state.아이디);
             formData.append('userPw', state.비밀번호);
             axios({
-                url: 'https://agnusdeistore.com/hangten/hangten_signin_select.php',
+                url: 'http://kkoma1221.dothome.co.kr/hangten/hangten_signin_select.php',
                 method: 'POST',
                 data: formData
             })
@@ -214,7 +227,7 @@ export default function Sub8Component() {
                 if(res.status===200){
                     //console.log(res.data);
                     if(res.data===0){
-                        alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+                        SignUpConfirmModalMethod('아이디 또는 비밀번호가 일치하지 않습니다.');
                     }
                     else{
                         const 로그인정보 = {
@@ -224,7 +237,9 @@ export default function Sub8Component() {
                             이메일: res.data.이메일,
                             휴대폰: res.data.휴대폰,
                             주소: res.data.주소,
-                            생일: res.data.생일
+                            생일: res.data.생일,
+                            성별: res.data.성별,
+                            이용약관동의: res.data.이용약관동의
                         }
                         sessionStorage.setItem('HANGTEN_SIGNIN_INFORMATION', JSON.stringify(로그인정보));
                         // console.log(JSON.stringify(로그인정보));
@@ -246,16 +261,16 @@ export default function Sub8Component() {
         let 주문번호 = state.주문번호;
 
         if(state.주문자명===''){
-            alert('주문자명 항목은 필수 입력값입니다.');
+            SignUpConfirmModalMethod('주문자명 항목은 필수 입력값입니다.');
         }
         else if(주문번호==='' || regExp.test(주문번호)===false){
-            alert('올바른 주문번호가 아닙니다.(주문번호는 하이픈(" - ")을 포함해서 입력해주세요.)');
+            SignUpConfirmModalMethod('올바른 주문번호가 아닙니다.(주문번호는 하이픈(" - ")을 포함해서 입력해주세요.)');
         }
         else if(state.비회원주문비밀번호===''){
-            alert('비회원주문 비밀번호 항목은 필수 입력값입니다.');
+            SignUpConfirmModalMethod('비회원주문 비밀번호 항목은 필수 입력값입니다.');
         }
         else{
-            alert('유효한 주문 번호가 아닙니다.');
+            SignUpConfirmModalMethod('유효한 주문 번호가 아닙니다.');
         }
     }
 
