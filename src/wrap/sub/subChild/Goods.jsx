@@ -9,6 +9,7 @@ import { isCategory1In } from "../../../reducer/isCategory1Reducer";
 import { isSubMeun1In } from "../../../reducer/isSubMeun1Reducer";
 import { isSubMeun2In } from "../../../reducer/isSubMeun2Reducer";
 import { isSubMeun3In } from "../../../reducer/isSubMeun3Reducer";
+import { productView } from "../../../reducer/productViewReducer";
     // const totalPages = Math.ceil(selector.goodsPage.totalGoodsLength / selector.goodsPage.displayViewLimet);
     // const currentGroup = Math.ceil(totalPages / selector.goodsPage.viewPageLimet);
     // const startPage = (currentGroup-1) * selector.goodsPage.viewPageLimet + 1;
@@ -188,7 +189,8 @@ export default function Goods(fileName) {
             이미지:`${path}${item.이미지}`,
             review:item.review
         }
-        localStorage.setItem("productView",JSON.stringify(obj));
+        dispatch(productView(obj))
+        // localStorage.setItem("productView",JSON.stringify(obj));
         navigate('/productView');
     }
 
