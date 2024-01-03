@@ -15,7 +15,7 @@ import { isSubMeun3In } from "../../../reducer/isSubMeun3Reducer";
     // const endPage = Math.min((currentGroup * selector.goodsPage.viewPageLimet), totalPages);
 
 
-export default function Goods() {
+export default function Goods(fileName) {
     const windowScroll = React.useRef();
     const dispatch = useDispatch();
     const selector = useSelector((state)=>state);
@@ -58,6 +58,7 @@ export default function Goods() {
         .catch((err)=>{
             console.log("AXIOS 오류!!"+err);
         })
+        console.log(fileName)
     },[]);
     const scrolling = ()=>{
         windowScroll.current.style.transition = 'none'
@@ -171,10 +172,24 @@ export default function Goods() {
         dispatch(isSubMeun3In(cnt));
     };
 
-    const onClickProductView=(e, item)=>{
+    const onClickProductView=(e, item, cost, path )=>{
         e.preventDefault();
-        navigate('/productView',{state:item});
-        console.log(item);
+        let obj = {
+            옵션:item.옵션,
+            성별:item.성별,
+            나이:item.나이,
+            구분1:item.구분1,
+            구분2:item.구분2,
+            GoodsName:item.GoodsName,
+            GoodsNum:item.GoodsNum,
+            원가:item.원가,
+            할인률:item.할인률,
+            판매가:Math.round(cost*(1-item.할인률)/10)*10,
+            이미지:`${path}${item.이미지}`,
+            review:item.review
+        }
+        localStorage.setItem("productView",JSON.stringify(obj));
+        navigate('/productView');
     }
 
     return (
@@ -261,13 +276,13 @@ export default function Goods() {
                                 
                                 <li key={item.GoodsNum}>
                                     <div className="img-box">
-                                        <a href="!#" onClick={(e)=>onClickProductView(e, item)}>
+                                        <a href="!#" onClick={(e)=>onClickProductView(e, item, item.원가, './images/Goods/')}>
                                             <img src={`./images/Goods/${item.이미지}`} alt="" />
                                         </a>
                                     </div>
                                     <div className="text-box">
                                         <div className="text1">
-                                            <a href="!#" onClick={onClickProductView}>{item.GoodsName}</a>
+                                            <a href="!#" onClick={(e)=>onClickProductView(e, item, item.원가, './images/Goods/')}>{item.GoodsName}</a>
                                         </div>
                                         <div className="text2">
                                             <h2>{Math.round(item.할인률*100)}%</h2>

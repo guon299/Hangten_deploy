@@ -42,6 +42,7 @@ export default function Sub2Component() {
         .catch((err)=>{
             console.log("AXIOS 오류!!" + err);
         })
+        console.log(fileName);
     },[]);
 
     return (

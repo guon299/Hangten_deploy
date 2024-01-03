@@ -47,7 +47,7 @@ export default function Sub1Component() {
         <div id='sub1' className='sub'>
             <div className="container">
                 <Title titleimg={state.titleimg} fileName={state.fileName}/>
-                <Goods />
+                <Goods fileName={state.fileName}/>
             </div>
         </div>
     );

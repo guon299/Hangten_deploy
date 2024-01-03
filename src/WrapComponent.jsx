@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {HashRouter, Routes, Route} from 'react-router-dom';
 import HeaderComponent from './wrap/HeaderComponent';
 import MainComponent from './wrap/MainComponent';
 import QuickMenuComponent from './wrap/QuickMenuComponent';
@@ -33,11 +33,8 @@ import Sub12MemberInfoComponent from "./wrap/sub/Sub12MemberInfoComponent.jsx";
 import FooterComponent from './wrap/FooterComponent';
 import SearchModalComponent from "./wrap/SearchModalComponent";
 import HpComponent from './wrap/HpComponent'
-<<<<<<< HEAD
 import ProductViewComponent from "./wrap/ProductViewComponent.jsx";
-=======
 import SignUpConfirmModalComponent from "./wrap/SignUpConfirmModalComponent";
->>>>>>> 906dd65f0595f6f566d50773df98329b9286ae86
 import { useSelector, useDispatch } from "react-redux";
 import { isSearchModal } from "./reducer/searchModal";
 import { signIn } from "./reducer/signIn";
@@ -91,12 +88,10 @@ export default function WrapComponent(){
                             <Route path="/sub11NoticeInsert" element={<Sub11NoticeInsertComponent />} />
                             <Route path="/sub11NoticeUpdate" element={<Sub11NoticeUpdateComponent />} />
                             <Route path="/sub12" element={ <Sub12Component /> }/>
-<<<<<<< HEAD
 
                             <Route path="/productView" element={ <ProductViewComponent /> }/>
-=======
                             <Route path='/memberInfo' element={<Sub12MemberInfoComponent/>} />
->>>>>>> 906dd65f0595f6f566d50773df98329b9286ae86
+
                         </Route>
                     </Routes>
                     <GoTopComponent />

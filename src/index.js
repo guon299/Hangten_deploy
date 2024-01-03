@@ -24,11 +24,8 @@ import confirmModal from './reducer/confirmModal.js';
 import hpconfirmModal from './reducer/hpConfirmModal.js';
 import signIn from './reducer/signIn.js';
 import hpsignDate from './reducer/hpsignDate.js';
-<<<<<<< HEAD
 import clickSubMeun from './reducer/subClickReducer.js';
-=======
 import signUpConfirmModal from './reducer/signUpConfirmModal.js';
->>>>>>> 906dd65f0595f6f566d50773df98329b9286ae86
 
 let store = configureStore({
   reducer: {
@@ -53,11 +50,9 @@ let store = configureStore({
     signIn,
     hpconfirmModal,
     hpsignDate,
-<<<<<<< HEAD
-    clickSubMeun
-=======
+    clickSubMeun,
     signUpConfirmModal
->>>>>>> 906dd65f0595f6f566d50773df98329b9286ae86
+
   }
 });
 
