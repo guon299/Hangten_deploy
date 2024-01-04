@@ -1,14 +1,38 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 export default function Sub9ComponentChild() {
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const selector = useSelector((state)=>state)
+
+    const [state, setState] = React.useState({
+        isList:false,
+        isNull:true
+    })
 
     const onClickGo=(e)=>{
         e.preventDefault();
         navigate('/index')
     }
+
+    React.useEffect(()=>{
+        if(selector.cartProduct.cartProduct.length!==0){
+            setState({
+                ...state,
+                isList:true,
+                isNull:false
+            })
+        }
+        else{
+            setState({
+                ...state,
+                isList:false,
+                isNull:true
+            })
+        }
+    },[])
 
     return (
         <div className='container'>
@@ -42,7 +66,59 @@ export default function Sub9ComponentChild() {
                     </div>
                     <div className="cart-box">
                         <div className="cart">
-                            <p>The shopping basket is empty.</p>
+                            {
+                                state.isNull &&(
+                                    <p>The shopping basket is empty.</p>
+                                )
+                            }
+                        </div>
+                            {
+                                // state.isList && (
+                                    
+                                // )
+                            }
+                        <div className="cartList">
+                            <div className="cart-title">
+                                <ul className='title-list'>
+                                    <li className='title li1'><input type="checkbox" name='AllCheck' /></li>
+                                    <li className='title li2'>이미지</li>
+                                    <li className='title li3'>상품정보</li>
+                                    <li className='title li4'>수량</li>
+                                    <li className='title li5'>상품구매금액</li>
+                                    <li className='title li6'>할인금액</li>
+                                    <li className='title li7'>적립금</li>
+                                    <li className='title li8'>배송구분</li>
+                                    <li className='title li9'>배송비</li>
+                                    <li className='title li10'>선택</li>
+                                </ul>
+                            </div>
+                            <div className="cart-conten">
+                                <ul className='content-list'>
+                                    <li className='list li1'><input type="checkbox" name='checkList' /></li>
+                                    <li className='list li2'><a href='!#'><img src="" alt="" /></a></li>
+                                    <li className='list li3'><a href="!#"></a><span></span></li>
+                                    <li className='list li4'>
+                                        <div className="cnt-box">
+                                            <input type="text" />
+                                            <div className="btn-box">
+                                                <button className="plus">plus</button>
+                                                <button className="minus">minus</button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li className='list li5'><p>{'판매가'}</p></li>
+                                    <li className='list li6'><p>{'할인금액'}</p></li>
+                                    <li className='list li7'><p>{'적립금'}</p></li>
+                                    <li className='list li8'><p>{'배송구분'}</p></li>
+                                    <li className='list li9'><p>{'배송비'}</p></li>
+                                    <li className='list li10'>
+                                        <div className="button-box">
+                                            <button className="oder">oder</button>
+                                            <button className="delete">delete</button>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                         <div className="button-box">
                             <div className="button">

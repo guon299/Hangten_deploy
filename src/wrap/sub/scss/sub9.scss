@@ -91,6 +91,29 @@
                             text-align: center;
                         }
                     }
+                    .cartList{
+                        width: 100%;
+                        .cart-title{
+                            width: 100%;
+                            .title-list{
+                                width: 100%;
+                                display: flex;
+                                .title{
+
+                                }
+                            }
+                        }
+                        .cart-conten{
+                            width: 100%;
+                            .content-list{
+                                width: 100%;
+                                display: flex;
+                                .list{
+
+                                }
+                            }
+                        }
+                    }
                     .button-box{
                         width: 100%;
                         position: relative;

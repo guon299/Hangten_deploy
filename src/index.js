@@ -27,6 +27,7 @@ import hpsignDate from './reducer/hpsignDate.js';
 import clickSubMeun from './reducer/subClickReducer.js';
 import signUpConfirmModal from './reducer/signUpConfirmModal.js';
 import productView from './reducer/productViewReducer.js';
+import cartProduct  from './reducer/cartReducer.js';
 
 let store = configureStore({
   reducer: {
@@ -53,7 +54,8 @@ let store = configureStore({
     hpsignDate,
     clickSubMeun,
     signUpConfirmModal,
-    productView
+    productView,
+    cartProduct
   }
 });
 
