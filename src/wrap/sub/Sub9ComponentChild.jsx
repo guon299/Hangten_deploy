@@ -9,21 +9,26 @@ export default function Sub9ComponentChild() {
 
     const [state, setState] = React.useState({
         isList:false,
-        isNull:true
+        isNull:true,
+        isBasong:false
     })
+    const [totalPay, setTotalPay] = React.useState(0);
+    const [cartList, setCartList] = React.useState([]);
 
     const onClickGo=(e)=>{
         e.preventDefault();
-        navigate('/index')
+        navigate('/index');
     }
 
     React.useEffect(()=>{
-        if(selector.cartProduct.cartProduct.length!==0){
+        let res = JSON.parse(localStorage.getItem('CART_PRODUCT'));
+        if( JSON.parse(localStorage.getItem('CART_PRODUCT')) !== null){
             setState({
                 ...state,
                 isList:true,
                 isNull:false
             })
+            setCartList(...cartList, res);
         }
         else{
             setState({
@@ -32,7 +37,29 @@ export default function Sub9ComponentChild() {
                 isNull:true
             })
         }
-    },[])
+    },[]);
+
+    React.useEffect(()=>{
+        let pay = 0;
+        if(cartList.length > 0){
+            cartList.map((item, idx)=>{
+                pay += item.판매가
+            });
+            if(pay < 30000){
+                setState({
+                    ...state,
+                    isBasong:true
+                })
+            }
+            else{
+                setState({
+                    ...state,
+                    isBasong:false
+                })
+            }
+            setTotalPay(pay);
+        }
+    },[cartList]);
 
     return (
         <div className='container'>
@@ -60,75 +87,80 @@ export default function Sub9ComponentChild() {
                         <ul>
                             <li className='list list1'>장바구니</li>
                             <li className='list list2'>장바구니에 담긴 상품은 10일 동안 보관됩니다.</li>
-                            <li className='list list3'>국내배송상품 (0)</li>
+                            <li className='list list3'>국내배송상품 ({cartList.length})</li>
                             <li className='list list4'>해외배송상품 (0)</li>
                         </ul>
                     </div>
                     <div className="cart-box">
-                        <div className="cart">
                             {
                                 state.isNull &&(
-                                    <p>The shopping basket is empty.</p>
+                                    <div className="cart">
+                                                <p>The shopping basket is empty.</p>
+                                    </div>
                                 )
                             }
-                        </div>
                             {
-                                // state.isList && (
-                                    
-                                // )
-                            }
-                        <div className="cartList">
-                            <div className="cart-title">
-                                <ul className='title-list'>
-                                    <li className='title li1'><input type="checkbox" name='AllCheck' /></li>
-                                    <li className='title li2'>이미지</li>
-                                    <li className='title li3'>상품정보</li>
-                                    <li className='title li4'>수량</li>
-                                    <li className='title li5'>상품구매금액</li>
-                                    <li className='title li6'>할인금액</li>
-                                    <li className='title li7'>적립금</li>
-                                    <li className='title li8'>배송구분</li>
-                                    <li className='title li9'>배송비</li>
-                                    <li className='title li10'>선택</li>
-                                </ul>
-                            </div>
-                            <div className="cart-conten">
-                                <ul className='content-list'>
-                                    <li className='list li1'><input type="checkbox" name='checkList' /></li>
-                                    <li className='list li2'><a href='!#'><img src="" alt="" /></a></li>
-                                    <li className='list li3'><a href="!#"></a><span></span></li>
-                                    <li className='list li4'>
-                                        <div className="cnt-box">
-                                            <input type="text" />
-                                            <div className="btn-box">
-                                                <button className="plus">plus</button>
-                                                <button className="minus">minus</button>
+                                state.isList && (
+                                    <div className="cartList">
+                                        <div className="cart-title">
+                                            <ul className='title-list'>
+                                                <li className='title li1'><input type="checkbox" name='AllCheck' /></li>
+                                                <li className='title li2'>이미지</li>
+                                                <li className='title li3'>상품정보</li>
+                                                <li className='title li4'>수량</li>
+                                                <li className='title li5'>상품구매금액</li>
+                                                <li className='title li6'>할인금액</li>
+                                                <li className='title li7'>적립금</li>
+                                                <li className='title li8'>배송구분</li>
+                                                <li className='title li9'>배송비</li>
+                                                <li className='title li10'>선택</li>
+                                            </ul>
+                                        </div>
+                                        <div className="cart-conten">
+                                            {
+                                                cartList.map((item, idx)=>{
+                                                    return(
+                                                        <ul className='content-list'>
+                                                            <li className='list li1'><input type="checkbox" name='checkList' /></li>
+                                                            <li className='list li2'><a href='!#'><img src={item.이미지} alt="" /></a></li>
+                                                            <li className='list li3'><a href="!#">{item.GoodsName}</a><span>{`옵션 : ${item.사이즈}`}</span></li>
+                                                            <li className='list li4'>
+                                                                <div className="cnt-box">
+                                                                    <input type="text" name='cartListCount' id='cartListCount' value={cartList[idx].수량}/>
+                                                                    <div className="btn-box">
+                                                                        <button className="plus"><img src="./images/cart/btn_quantity_up.gif" alt="" /></button>
+                                                                        <button className="minus"><img src="./images/cart/btn_quantity_down.gif" alt="" /></button>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li className='list li5'><p>{Number(item.판매가).toLocaleString('ko-kr')}원</p></li>
+                                                            <li className='list li6'><p>{'-'}</p></li>
+                                                            <li className='list li7'><p>{'-'}</p></li>
+                                                            <li className='list li8'><p>{'-'}</p></li>
+                                                            <li className='list li9'><p>{`${state.isBasong!==true?'무료':'3000원 조건'}`}</p></li>
+                                                            <li className='list li10'>
+                                                                <div className="button-box">
+                                                                    <button className="oder">oder</button>
+                                                                    <button className="delete">delete</button>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                        <div className="cart-foodter">
+                                            <div className="foodter-left">
+                                                <h2>{"베송방식"}</h2>
+                                            </div>
+                                            <div className="foodter-right">
+                                                <h3>{`상품구매금액 ${totalPay} + ${state.isBasong!==true?'배송비 0(무료)':'배송비 3000'} 합계 : `}</h3>
+                                                <h4>{state.isBasong!==true?totalPay:totalPay+3000}원</h4>
                                             </div>
                                         </div>
-                                    </li>
-                                    <li className='list li5'><p>{'판매가'}</p></li>
-                                    <li className='list li6'><p>{'할인금액'}</p></li>
-                                    <li className='list li7'><p>{'적립금'}</p></li>
-                                    <li className='list li8'><p>{'배송구분'}</p></li>
-                                    <li className='list li9'><p>{'배송비'}</p></li>
-                                    <li className='list li10'>
-                                        <div className="button-box">
-                                            <button className="oder">oder</button>
-                                            <button className="delete">delete</button>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="cart-foodter">
-                                <div className="foodter-left">
-                                    <h2>{"베송방식"}</h2>
-                                </div>
-                                <div className="foodter-right">
-                                    <h3>{"상품금액+배송비"}</h3>
-                                    <h4>{"총금액"}</h4>
-                                </div>
-                            </div>
-                        </div>
+                                    </div>
+                                )
+                            }
                         <div className="button-box">
                             <div className="button">
                                 <button className='btn1'>전체상품주문</button>

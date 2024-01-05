@@ -118,8 +118,6 @@ export default function ProductViewComponent () {
         let res = null;
         res = localSave.map((item)=>cartObj.map((item2)=>item.제품코드===item2.제품코드? 1 : 0));
 
-        console.log(res);
-
         if( res.map((item)=>item.includes(1)).includes(true) ){
             cartObj.map((item) => 
                 localSave.map((item2, idx) => {
@@ -141,12 +139,8 @@ export default function ProductViewComponent () {
             })                    
 
         }
-
-  
         localStorage.setItem('CART_PRODUCT', JSON.stringify(localSave));
         dispatch(cartProduct(localSave));  
-
-        console.log(obj)
     }
     const onClickBuy=(e)=>{
         e.preventDefault();

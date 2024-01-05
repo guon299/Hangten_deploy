@@ -124,10 +124,9 @@
                         }
                         .cart-conten{
                             width: 100%;
-                            height: 95px;
                             .content-list{
                                 width: 100%;
-                                height: 100%;
+                                height: 95px;
                                 display: flex;
                                 .list{
                                     width: 8%;
@@ -142,10 +141,73 @@
                                         width: 3%;
                                         border-left: 0;
                                     }
+                                    &.li2{
+                                        padding: 18px 0;
+                                        img{
+                                            width: 60px;
+                                            height: 60px;
+                                        }
+                                    }
                                     &.li3{
                                         width: 33%;
+                                        padding: 27px;
+                                        a{
+                                            width: 100%;
+                                            display: inline-block;
+                                            font-size: 13px;
+                                        }
+                                        span{
+                                            margin-top: 5px;
+                                            width: 100%;
+                                            display: inline-block;
+                                            font-size: 18px;
+                                            color: #999;
+                                        }
                                     }
-
+                                    &.li4{
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                        .cnt-box{
+                                            position: relative;
+                                            width: 70px;
+                                            height: 30px;
+                                            border: 1px solid #ccc;
+                                            input[type='text']{
+                                                width: 50px;
+                                                height: 100%;
+                                                border: 0;
+                                                outline: 0;
+                                            }
+                                            .btn-box{
+                                                position: absolute;
+                                                top: -1px;
+                                                right: 0;
+                                                width: 20px;
+                                                height: 100%;
+                                                button{
+                                                    position: absolute;
+                                                    width: 23px;
+                                                    height: 16px;
+                                                    background: 0;
+                                                    border: 0;
+                                                    cursor: pointer;
+                                                    &.plus{
+                                                        top:0;
+                                                        right: 0;
+                                                    }
+                                                    &.minus{
+                                                        bottom: 0;
+                                                        right: 0;
+                                                    }
+                                                    img{
+                                                    width: 23px;
+                                                    height: 16px;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
