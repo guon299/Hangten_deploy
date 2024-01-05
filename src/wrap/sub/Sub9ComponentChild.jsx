@@ -119,6 +119,15 @@ export default function Sub9ComponentChild() {
                                     </li>
                                 </ul>
                             </div>
+                            <div className="cart-foodter">
+                                <div className="foodter-left">
+                                    <h2>{"베송방식"}</h2>
+                                </div>
+                                <div className="foodter-right">
+                                    <h3>{"상품금액+배송비"}</h3>
+                                    <h4>{"총금액"}</h4>
+                                </div>
+                            </div>
                         </div>
                         <div className="button-box">
                             <div className="button">
