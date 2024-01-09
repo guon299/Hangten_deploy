@@ -32,7 +32,7 @@ export default function Sub10UserListComponent() {
         .catch((err)=>{
             console.log(err)
         })
-    },[])
+    },[state.arr])
 
     const SignUpConfirmModalMethod=(msg)=>{
         const obj = {
