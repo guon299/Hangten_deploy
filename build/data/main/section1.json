@@ -1,0 +1,28 @@
+{
+    "slide":[
+        {"slideNuber":"main_s01_start","slideImg":"slide9.jpeg",
+        "textLine1":"","textLine2":"","textLine3":""},
+        {"slideNuber":"main_s01_0001","slideImg":"slide1.jpeg",
+        "textLine1":"공식몰 단독","textLine2":"행텐데이","textLine3":"전상품 50% 이상 할인과 풍성한 경품 이벤트!"},
+        {"slideNuber":"main_s01_0002","slideImg":"slide2.jpeg",
+        "textLine1":"미리하는 월동준비","textLine2":"올겨울 필수아이템 미리보기","textLine3":"기모·플리스·덕다운·패딩·니트까지!"},
+        {"slideNuber":"main_s01_0003","slideImg":"slide3.jpeg",
+        "textLine1":"COZYACTIVE LOOK","textLine2":"HT101","textLine3":""},
+        {"slideNuber":"main_s01_0004","slideImg":"slide4.jpeg",
+        "textLine1":"행텐 23FW 신상 아우터","textLine2":"체험단 리뷰 이벤트","textLine3":"신상 글로시 퀄팅 점퍼로 맞이하는 따뜻한 겨울"},
+        {"slideNuber":"main_s01_0005","slideImg":"slide5.jpeg",
+        "textLine1":"#INFLUENCERS","textLine2":"ALWAYS HANGTEN","textLine3":"다양한 인플루언서와 함께하는","textLine32":"행텐의 베스트셀러 아이템"},
+        {"slideNuber":"main_s01_0006","slideImg":"slide6.jpeg",
+        "textLine1":"2023 F/W COLLECTION","textLine2":"HANGTEN NEW ARRIVAL","textLine13":"WITH 이선빈"},
+        {"slideNuber":"main_s01_0007","slideImg":"slide7.jpeg",
+        "textLine1":"HT X HT","textLine2":"HANGTEN TEENS","textLine3":"2023 F/W COLLECTION","textLine22":"NEW LOOK"},
+        {"slideNuber":"main_s01_0008","slideImg":"slide8.jpeg",
+        "textLine1":"WARM TECH WEAR","textLine2":"HOT-TEN 이너웨어","textLine3":"오래오래 따뜻하게 행텐과 함께하세요"},
+        {"slideNuber":"main_s01_0009","slideImg":"slide9.jpeg",
+        "textLine1":"","textLine2":"","textLine3":""},
+        {"slideNuber":"main_s01_end","slideImg":"slide1.jpeg",
+        "textLine1":"공식몰 단독","textLine2":"행텐데이","textLine3":"전상품 50% 이상 할인과 풍성한 경품 이벤트!"},
+        {"slideNuber":"main_s01_end2","slideImg":"slide2.jpeg",
+        "textLine1":"미리하는 월동준비","textLine2":"올겨울 필수아이템 미리보기","textLine3":"기모·플리스·덕다운·패딩·니트까지!"}
+    ]
+}
