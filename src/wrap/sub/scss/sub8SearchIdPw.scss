@@ -4,6 +4,9 @@
     margin: 0 auto;
     height: 750px;
     padding: 60px 60px 6px;
+    &.admin_id_search {
+        background: #fafafa;
+    }
     .container {
         width: 100%;
         max-width: 550px;
@@ -151,6 +154,13 @@
                         color: #222;
                         border-radius: 6px;
                         cursor: pointer;
+                    }
+                    &.admin {
+                        input[type='submit']{
+                            background-color: #222;
+                            border: 1px solid #222;
+                            color: #fff;
+                        }
                     }
                 }
             }

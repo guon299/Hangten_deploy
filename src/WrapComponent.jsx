@@ -22,6 +22,10 @@ import Sub8SearchIdComponent from "./wrap/sub/Sub8SearchIdComponent.jsx";
 import Sub8SearchPwComponent from "./wrap/sub/Sub8SearchPwComponent.jsx";
 import Sub8SearchIdResultComponent from './wrap/sub/Sub8SearchIdResultComponent.jsx';
 import Sub8SearchPwResultComponent from "./wrap/sub/Sub8SearchPwResultComponent.jsx";
+import Sub8AdminSearchIdComponent from "./wrap/sub/Sub8AdminSearchIdComponent.jsx";
+import Sub8AdminSearchPwComponent from "./wrap/sub/Sub8AdminSearchPwComponent.jsx";
+import Sub8AdminSearchIdResultComponent from "./wrap/sub/Sub8AdminSearchIdResultComponent.jsx";
+import Sub8AdminSearchPwResultComponent from "./wrap/sub/Sub8AdminSearchPwResultComponent.jsx";
 import Sub9Component from "./wrap/sub/Sub9Component";
 import Sub10UserListComponent from "./wrap/sub/Sub10UserListComponent";
 import Sub11NoticeComponent from "./wrap/sub/Sub11NoticeComponent.jsx";
@@ -81,6 +85,10 @@ export default function WrapComponent(){
                             <Route path="/sub8SearchPw" element={ <Sub8SearchPwComponent />} />
                             <Route path="/sub8SearchIdResult" element={ <Sub8SearchIdResultComponent />} />
                             <Route path="/sub8SearchPwResult" element={ <Sub8SearchPwResultComponent />} />
+                            <Route path="/Sub8AdminSearchId" element={<Sub8AdminSearchIdComponent />} />
+                            <Route path="/Sub8AdminSearchPw" element={<Sub8AdminSearchPwComponent/>} />
+                            <Route path="/Sub8AdminSearchIdResult" element={<Sub8AdminSearchIdResultComponent />} />
+                            <Route path="/Sub8AdminSearchPwResult" element={<Sub8AdminSearchPwResultComponent />} />
                             <Route path="/sub9" element={ <Sub9Component /> }/>
                             <Route path="/sub10UserList" element={ <Sub10UserListComponent /> }/>
                             <Route path="/sub11Notice" element={ <Sub11NoticeComponent /> }/>
@@ -115,7 +123,6 @@ export default function WrapComponent(){
                     selector.hpconfirmModal.isHpConfirmModal &&
                     <HpComponent />
                 }
-
         </div>
     )
 }
