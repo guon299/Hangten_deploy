@@ -301,32 +301,32 @@ export default function Sub7AdminSignUpComponent() {
             SignUpConfirmModalMethod('유효한 이메일을 입력해주세요.');
         }        
         else { 
-            const formData = new FormData(); 
-            formData.append('userId',       state.아이디);
-            formData.append('userPw',       state.비밀번호);
-            formData.append('userName',     state.이름);
-            formData.append('userEmail',    state.이메일);
-            formData.append('userHp',       state.휴대전화);
-            formData.append('userAddress',  `${state.주소1} ${state.주소2}`);
-            formData.append('userGender',  state.성별);
+            const formData = new FormData();
+            formData.append('adminId',       state.아이디);
+            formData.append('adminPw',       state.비밀번호);
+            formData.append('adminName',     state.이름);
+            formData.append('adminEmail',    state.이메일);
+            formData.append('adminHp',       state.휴대전화);
+            formData.append('adminAddress',  `${state.주소1} ${state.주소2}`);
+            formData.append('adminGender',  state.성별);
             axios({
                 url: 'http://answotlr12.dothome.co.kr/hangten/hangten_insert_admin.php',
                 method: 'POST',
                 data: formData  
             })
             .then((res)=>{
-                console.log(res)
-                console.log(res.data)
+                // console.log(res)
+                // console.log(res.data)
                 if(res.status===200){  
                     if(res.data===1){
                         const 로그인정보 = {
                             회원등급: '관리자',
-                            아이디: res.data.아이디,
-                            이름: res.data.이름, 
-                            이메일: res.data.이메일,
-                            휴대폰: res.data.휴대전화,
-                            주소: res.data.주소,
-                            성별: res.data.성별
+                            아이디: state.아이디,
+                            이름: state.이름, 
+                            이메일: state.이메일,
+                            휴대폰: state.휴대전화,
+                            주소: `${state.주소1} ${state.주소2}`,
+                            성별: state.성별
                         }
                         sessionStorage.setItem('HANGTEN_SIGNIN_INFORMATION', JSON.stringify(로그인정보));
                         dispatch(signIn(로그인정보));
