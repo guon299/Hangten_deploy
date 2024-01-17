@@ -15,8 +15,6 @@ export default function Sub7AdminSignUpComponent() {
     const navigate = useNavigate()
     const location = useLocation()
 
-
-
     const [state,setState] = React.useState({
         아이디:'',
         아이디중복:[],
@@ -324,11 +322,11 @@ export default function Sub7AdminSignUpComponent() {
                         const 로그인정보 = {
                             회원등급: '관리자',
                             아이디: res.data.아이디,
-                            비밀번호: res.data.아이디,
                             이름: res.data.이름, 
                             이메일: res.data.이메일,
                             휴대폰: res.data.휴대전화,
-                            주소: res.data.주소
+                            주소: res.data.주소,
+                            성별: res.data.성별
                         }
                         sessionStorage.setItem('HANGTEN_SIGNIN_INFORMATION', JSON.stringify(로그인정보));
                         dispatch(signIn(로그인정보));
