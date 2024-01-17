@@ -39,12 +39,12 @@ export default function Sub8AdminComponent() {
 
     const onClickSearchIdBtn=(e)=>{
         e.preventDefault();
-        navigate('/sub8SearchId');
+        navigate('/Sub8AdminSearchId');
     }
 
     const onClickSearchPwBtn=(e)=>{
         e.preventDefault();
-        navigate('/sub8SearchPw');
+        navigate('/sub8AdminSearchPw');
     }
 
     const onClickGoSignUp=(e)=>{

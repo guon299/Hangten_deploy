@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signUpConfirmModal } from '../../reducer/signUpConfirmModal';
 
-export default function Sub8SearchPwComponent() {
+export default function Sub8AdminSearchPwComponent(){
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -18,16 +18,15 @@ export default function Sub8SearchPwComponent() {
         휴대폰1: '',
         휴대폰2: '',
         휴대폰3: '',
-        법인번호: '',
-        법인번호1: '',
-        법인번호2: '',
-        등록번호: '',
-        등록번호1: '',
-        등록번호2: '',
-        isValue: '이메일',
-        memberType: 'individual',
-        비밀번호: ''
+        isValue: '이메일'
     });
+
+    const onChangeIsValue=(e)=>{
+        setState({
+            ...state,
+            isValue: e.target.value
+        });
+    }
 
     const onChangeId=(e)=>{
         setState({
@@ -81,68 +80,6 @@ export default function Sub8SearchPwComponent() {
         }
     },[state.휴대폰1, state.휴대폰2, state.휴대폰3]);
 
-    const onChangeIsValue=(e)=>{
-        setState({
-            ...state,
-            isValue: e.target.value
-        });
-    }
-
-    const onChangeMemberType=(e)=>{
-        setState({
-            ...state,
-            memberType: e.target.value
-        });
-    }
-
-    const onChangeCorpNum1=(e)=>{
-        setState({
-            ...state,
-            법인번호1: e.target.value
-        });
-    }
-
-    const onChangeCorpNum2=(e)=>{
-        setState({
-            ...state,
-            법인번호2: e.target.value
-        });
-    }
-
-    React.useEffect(()=>{
-        if(state.법인번호1!=='' && state.법인번호2!==''){
-            let 법인번호 = `${state.법인번호1}-${state.법인번호2}`;
-            setState({
-                ...state,
-                법인번호: 법인번호
-            });
-        }
-    },[state.법인번호1, state.법인번호2]);
-
-    const onChangeForeNum1=(e)=>{
-        setState({
-            ...state,
-            등록번호1: e.target.value
-        });
-    }
-
-    const onChangeForeNum2=(e)=>{
-        setState({
-            ...state,
-            등록번호2: e.target.value
-        });
-    }
-
-    React.useEffect(()=>{
-        if(state.등록번호1!=='' && state.등록번호2!==''){
-            let 등록번호 = `${state.등록번호1}-${state.등록번호2}`;
-            setState({
-                ...state,
-                등록번호: 등록번호
-            });
-        }
-    },[state.등록번호1, state.등록번호2]);
-
     const SignUpConfirmModalMethod=(msg)=>{
         const obj = {
             signUpIsConfirmModal: true,
@@ -155,11 +92,11 @@ export default function Sub8SearchPwComponent() {
         htmlEl.classList.add('on');
     }
 
-    const onSubmitSearchPw=(e)=>{
+    const onSubmitAdminSearchPw=(e)=>{
         e.preventDefault();
         if(state.isValue==='이메일'){
             if(state.아이디===''){
-                SignUpConfirmModalMethod('아이디 항목은 필수 입력값입니다.');
+                SignUpConfirmModalMethod('아이디를 입력하세요.');
             }
             else if(state.이름===''){
                 SignUpConfirmModalMethod('이름을 입력하세요.');
@@ -167,27 +104,28 @@ export default function Sub8SearchPwComponent() {
             else if(state.이메일===''){
                 SignUpConfirmModalMethod('이메일을 입력하세요.');
             }
-            else{
+            else {
                 let formData = new FormData();
-                formData.append('userId', state.아이디);
-                formData.append('userName', state.이름);
-                formData.append('userEmail', state.이메일);
+                formData.append('adminId', state.아이디);
+                formData.append('adminName', state.이름);
+                formData.append('adminEmail', state.이메일);
                 axios({
-                    url: 'http://kkoma1221.dothome.co.kr/hangten/hangten_search_pw_email_select.php',
+                    url: 'http://kkoma1221.dothome.co.kr/hangten/hangten_admin_search_pw_email_select.php',
                     method: 'POST',
                     data: formData
                 })
                 .then((res)=>{
                     if(res.status===200){
-                        console.log(res.data);
-                        if(res.data!==''){
-                            setState({
-                                ...state,
-                                비밀번호: res.data.비밀번호
+                        // console.log(res.data);
+                        if(res.data===1){
+                            navigate('/sub8AdminSearchPwResult', {
+                                state: {
+                                    아이디: state.아이디,
+                                    이름: state.이름,
+                                    이메일: state.이메일,
+                                    휴대폰: state.휴대폰
+                                }
                             });
-                        }
-                        else{
-                            SignUpConfirmModalMethod('입력하신 정보로 가입 된 회원은 존재하지 않습니다.');
                         }
                     }
                 })
@@ -198,31 +136,35 @@ export default function Sub8SearchPwComponent() {
         }
         else if(state.isValue==='휴대폰번호'){
             if(state.아이디===''){
-                SignUpConfirmModalMethod('아이디 항목은 필수 입력값입니다.');
+                SignUpConfirmModalMethod('아이디를 입력하세요.');
             }
             else if(state.이름===''){
                 SignUpConfirmModalMethod('이름을 입력하세요.');
             }
             else if(state.휴대폰===''){
-                SignUpConfirmModalMethod('휴대폰번호를 입력하세요.');
+                SignUpConfirmModalMethod('휴대폰 번호를 입력하세요.');
             }
             else {
                 let formData = new FormData();
-                formData.append('userId', state.아이디);
-                formData.append('userName', state.이름);
-                formData.append('userHp', state.휴대폰);
+                formData.append('adminId', state.아이디);
+                formData.append('adminName', state.이름);
+                formData.append('adminHp', state.휴대폰);
                 axios({
-                    url: 'http://kkoma1221.dothome.co.kr/hangten/hangten_search_pw_hp_select.php',
+                    url: 'http://kkoma1221.dothome.co.kr/hangten/hangten_admin_search_pw_hp_select.php',
                     method: 'POST',
                     data: formData
                 })
                 .then((res)=>{
                     if(res.status===200){
                         // console.log(res.data);
-                        if(res.data!==''){
-                            setState({
-                                ...state,
-                                비밀번호: res.data.비밀번호
+                        if(res.data===1){
+                            navigate('/sub8AdminSearchPwResult', {
+                                state: {
+                                    아이디: state.아이디,
+                                    이름: state.이름,
+                                    이메일: state.이메일,
+                                    휴대폰: state.휴대폰
+                                }
                             });
                         }
                     }
@@ -234,33 +176,18 @@ export default function Sub8SearchPwComponent() {
         }
     }
 
-    React.useEffect(()=>{
-        if(state.비밀번호!==''){
-            navigate('/sub8SearchPwResult', {
-                state: {
-                    아이디: state.아이디,
-                    이름: state.이름,
-                    이메일: state.이메일,
-                    비밀번호: state.비밀번호,
-                    휴대폰: state.휴대폰
-                }
-            });
-        }
-        return;
-    },[state.비밀번호]);
-    
     return (
-        <div id='searchId'>
+        <div id='searchId' className='admin_id_search'>
             <div className="container">
                 <div className="title">
-                    <h2>비밀번호 찾기</h2>
+                    <h2>관리자 비밀번호 찾기</h2>
                     <div className="info">
                         <p>가입하신 방법에 따라 비밀번호 찾기가 가능합니다.</p>
                         <p>비밀번호 찾기를 위해 정보를 입력해주세요.</p>
                     </div>
                 </div>
                 <div className="content">
-                    <form action="" autoComplete='off' onSubmit={onSubmitSearchPw}>
+                    <form action="" autoComplete='off' onSubmit={onSubmitAdminSearchPw}>
                         <div className="tab-button-box">
                             <label htmlFor="tabBtnEmail">
                                 <input
@@ -282,59 +209,19 @@ export default function Sub8SearchPwComponent() {
                                     onChange={onChangeIsValue}
                                 />
                             휴대폰번호</label>
-                            {
-                                (state.memberType==='individual' || state.memberType==='business') && (
-                                    <label htmlFor="tabBtnHpAuthen">
-                                        <input
-                                            type="radio"
-                                            name='tabBtn'
-                                            id='tabBtnHpAuthen'
-                                            value={'휴대폰인증'}
-                                            checked={state.isValue.includes('휴대폰인증')}
-                                            onChange={onChangeIsValue}
-                                        />
-                                    휴대폰인증</label>
-                                )
-                            }
-                            {
-                                state.memberType==='corporation' && (
-                                    <label htmlFor="tabBtnCorpNum">
-                                        <input
-                                            type="radio"
-                                            name='tabBtn'
-                                            id='tabBtnCorpNum'
-                                            value={'법인번호'}
-                                            checked={state.isValue.includes('법인번호')}
-                                            onChange={onChangeIsValue}
-                                        />
-                                    법인번호</label>
-                                )
-                            }
-                            {
-                                state.memberType==='foreigner' && (
-                                    <label htmlFor="tabBtnForeNum">
-                                        <input
-                                            type="radio"
-                                            name='tabBtn'
-                                            id='tabBtnForeNum'
-                                            value={'등록번호'}
-                                            checked={state.isValue.includes('등록번호')}
-                                            onChange={onChangeIsValue}
-                                        />
-                                    등록번호</label>
-                                )
-                            }
+                            <label htmlFor="tabBtnHpAuthen">
+                                <input
+                                    type="radio"
+                                    name='tabBtn'
+                                    id='tabBtnHpAuthen'
+                                    value={'휴대폰인증'}
+                                    checked={state.isValue.includes('휴대폰인증')}
+                                    onChange={onChangeIsValue}
+                                />
+                            휴대폰인증</label>
                         </div>
                         <div className="input-box">
                             <ul>
-                                <li>
-                                    <select name="searchType" id="searchType" onChange={onChangeMemberType}>
-                                        <option value="individual" onSelect={state.memberType.includes('individual')}>개인회원</option>
-                                        <option value="business" onSelect={state.memberType.includes('business')}>개인 사업자회원</option>
-                                        <option value="corporation" onSelect={state.memberType.includes('corporation')}>법인 사업자회원</option>
-                                        <option value="foreigner" onSelect={state.memberType.includes('foreigner')}>외국인회원</option>
-                                    </select>
-                                </li>
                                 <li>
                                     <input
                                         type="text"
@@ -409,53 +296,9 @@ export default function Sub8SearchPwComponent() {
                                         </li>
                                     )
                                 }
-                                {
-                                    state.isValue==='법인번호' && (
-                                        <li className='corp-num'>
-                                            <input
-                                                type="text"
-                                                name='userCorpNum'
-                                                id='userCorpNum1'
-                                                value={state.법인번호1}
-                                                placeholder='법인번호'
-                                                onChange={onChangeCorpNum1}
-                                            />
-                                            <span>-</span>
-                                            <input
-                                                type="text"
-                                                name='userCorpNum'
-                                                id='userCorpNum2'
-                                                value={state.법인번호2}
-                                                onChange={onChangeCorpNum2}
-                                            />
-                                        </li>
-                                    )
-                                }
-                                {
-                                    state.isValue==='등록번호' && (
-                                        <li className='fore-num'>
-                                        <input
-                                            type="text"
-                                            name='userForeNum'
-                                            id='userForeNum1'
-                                            value={state.등록번호1}
-                                            placeholder='외국인 등록번호'
-                                            onChange={onChangeForeNum1}
-                                        />
-                                        <span>-</span>
-                                        <input
-                                            type="text"
-                                            name='userForeNum'
-                                            id='userForeNum2'
-                                            value={state.등록번호2}
-                                            onChange={onChangeForeNum2}
-                                        />
-                                    </li>
-                                    )
-                                }
                             </ul>
                         </div>
-                        <div className="button-box">
+                        <div className="button-box admin">
                             <input type="submit" name='submitBtn' id='submitBtn' value={'확인'} />
                         </div>
                     </form>
