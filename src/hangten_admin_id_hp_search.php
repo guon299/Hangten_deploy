@@ -10,7 +10,7 @@
 
     if(mysqli_num_rows($res)>0){
         $record = mysqli_fetch_array($res);
-        echo '{"아이디":"'.$record['adminId']'", "가입일":"'.$record['adminGaib']'"}';
+        echo '{"아이디":"'.$record['adminId'].'", "가입일":"'.$record['adminGaib'].'"}';
     }
     else {
         echo '';
