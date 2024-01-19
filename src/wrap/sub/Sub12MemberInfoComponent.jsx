@@ -51,25 +51,41 @@ export default function Sub12MemberInfoComponent() {
 
     React.useEffect(()=>{
         if(selector.signIn.로그인정보!==null){
-            setState({
-                ...state,
-                아이디: selector.signIn.로그인정보.아이디,
-                이름: selector.signIn.로그인정보.이름,
-                휴대전화: selector.signIn.로그인정보.휴대폰,
-                이메일: selector.signIn.로그인정보.이메일,
-                성별: selector.signIn.로그인정보.성별,
-                이용약관동의: selector.signIn.로그인정보.이용약관동의.split(','),
-                SMS수신여부: selector.signIn.로그인정보.이용약관동의.includes('동의함4')?'수신함':'수신안함',
-                이메일수신여부: selector.signIn.로그인정보.이용약관동의.includes('동의함5')?'수신함':'수신안함',
-                생년: selector.signIn.로그인정보.생일.split('-')[0],
-                생월: selector.signIn.로그인정보.생일.split('-')[1],
-                생일: selector.signIn.로그인정보.생일.split('-')[2],
-                우편번호: selector.address.zonecode,
-                주소1: selector.address.주소1!==''?(selector.address.주소1):(selector.signIn.로그인정보.주소.split(')')[0]),
-                주소2: selector.signIn.로그인정보.주소.split(')')[1]
-            });
+            let formData = new FormData();
+            formData.append('userId', selector.signIn.로그인정보.아이디);
+            axios({
+                url:'http://kkoma1221.dothome.co.kr/hangten/hangten_user_info_select.php',
+                method: 'POST',
+                data: formData
+            })
+            .then((res)=>{
+                if(res.status===200){
+                    console.log(res.data);
+                    setState({
+                        ...state,
+                        아이디: selector.signIn.로그인정보.아이디,
+                        이름: res.data.이름,
+                        휴대전화: res.data.휴대폰,
+                        이메일: res.data.이메일,
+                        성별: res.data.성별,
+                        이용약관동의: res.data.이용약관동의.split(','),
+                        SMS수신여부: res.data.이용약관동의.includes('동의함4')?'수신함':'수신안함',
+                        이메일수신여부: res.data.이용약관동의.includes('동의함5')?'수신함':'수신안함',
+                        생년: res.data.생년월일.split('-')[0],
+                        생월: res.data.생년월일.split('-')[1],
+                        생일: res.data.생년월일.split('-')[2],
+                        우편번호: selector.address.zonecode,
+                        주소1: selector.address.주소1!==''?(selector.address.주소1):(res.data.주소.split(')')[0]),
+                        주소2: res.data.주소.split(')')[1]===undefined?'':res.data.주소.split(')')[1]
+                    });
+                }
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+
         }
-    },[selector.signIn.로그인정보, selector.address.주소1]);
+    },[selector.signIn, selector.address.주소1]);
 
     const onChangePw1=(e)=>{
         setState({
@@ -314,6 +330,26 @@ export default function Sub12MemberInfoComponent() {
     const onClickCancelBtn=(e)=>{
         e.preventDefault();
         navigate('/index');
+    }
+
+    const onClickByeBtn=(e)=>{
+        e.preventDefault();
+        let formData = new FormData();
+        formData.append('userId', state.아이디);
+        formData.append('userName', state.이름);
+        axios({
+            url:'http://kkoma1221.dothome.co.kr/hangten/hangten_user_table_delete.php',
+            method: 'POST',
+            data: formData
+        })
+        .then((res)=>{
+            if(res.status===200){
+                console.log(res.data);
+            }
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
     }
 
     return (
@@ -757,6 +793,7 @@ export default function Sub12MemberInfoComponent() {
                                     <div className="button-box">
                                         <button type='submit' className='update-btn'>회원정보수정</button>
                                         <button onClick={onClickCancelBtn} className='cancel-btn'>취소</button>
+                                        <button type='button' className='update-btn' onClick={onClickByeBtn}>회원탈퇴</button>
                                     </div>
                                 </form>
                             </div>
