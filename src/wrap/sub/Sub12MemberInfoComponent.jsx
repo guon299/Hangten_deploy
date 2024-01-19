@@ -344,7 +344,10 @@ export default function Sub12MemberInfoComponent() {
         })
         .then((res)=>{
             if(res.status===200){
-                console.log(res.data);
+                // console.log(res.data);
+                SignUpConfirmModalMethod('회원 탈퇴 하시겠습니까?');
+                sessionStorage.removeItem('HANGTEN_SIGNIN_INFORMATION');
+                dispatch(signIn(null));
             }
         })
         .catch((err)=>{
