@@ -323,10 +323,8 @@ export default function Sub7AdminSignUpComponent() {
                             회원등급: '관리자',
                             아이디: state.아이디,
                             이름: state.이름, 
-                            이메일: state.이메일,
                             휴대폰: state.휴대전화,
-                            주소: `${state.주소1} ${state.주소2}`,
-                            성별: state.성별
+                            주소: `${state.주소1} ${state.주소2}`
                         }
                         sessionStorage.setItem('HANGTEN_SIGNIN_INFORMATION', JSON.stringify(로그인정보));
                         dispatch(signIn(로그인정보));

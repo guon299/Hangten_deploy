@@ -432,9 +432,12 @@ export default function Sub7SignUpComponentChild() {
                     if(res.data===1){
                         navigate('/sub7SignUpOk',{
                             state:{
+                                회원등급: '일반',
                                 아이디:state.아이디,
                                 이름:state.이름,
-                                이메일:state.이메일
+                                이메일:state.이메일,
+                                휴대폰:state.휴대폰,
+                                주소: `${state.주소1} ${state.주소2}`
                             }   
                         })                         
                     }   

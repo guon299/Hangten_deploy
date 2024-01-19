@@ -237,9 +237,6 @@ export default function Sub8Component() {
                             이메일: res.data.이메일,
                             휴대폰: res.data.휴대폰,
                             주소: res.data.주소,
-                            생일: res.data.생일,
-                            성별: res.data.성별,
-                            이용약관동의: res.data.이용약관동의
                         }
                         sessionStorage.setItem('HANGTEN_SIGNIN_INFORMATION', JSON.stringify(로그인정보));
                         // console.log(JSON.stringify(로그인정보));
