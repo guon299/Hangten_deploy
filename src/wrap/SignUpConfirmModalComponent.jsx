@@ -105,6 +105,23 @@ export default function SignUpConfirmModalComponent()  {
                 navigate('/sub12');
             },100);
         }
+        else if(selector.signUpConfirmModal.signUpConfirmMsg === '회원 탈퇴 하시겠습니까?'){
+            const obj = {
+                signUpIsConfirmModal: true,
+                signUpConfirmMsg: '탈퇴가 완료되었습니다.'
+            }
+            dispatch(signUpConfirmModal(obj));
+        }
+        else if(selector.signUpConfirmModal.signUpConfirmMsg === '탈퇴가 완료되었습니다.'){
+            const obj = {
+                signUpConfirmModal: false,
+                signUpConfirmMsg: ''
+            }
+            dispatch(signUpConfirmModal(obj));
+            setTimeout(()=>{
+                navigate('/index');
+            },100);
+        }
         else{
             const obj = {
                 signUpIsConfirmModal: false,
@@ -145,6 +162,7 @@ export default function SignUpConfirmModalComponent()  {
                                     || selector.signUpConfirmModal.signUpConfirmMsg==='비밀번호를 변경하시겠습니까?'
                                     || selector.signUpConfirmModal.signUpConfirmMsg === '공지사항을 수정하시겠습니까?'
                                     || selector.signUpConfirmModal.signUpConfirmMsg === '공지사항을 삭제하시겠습니까?'
+                                    || selector.signUpConfirmModal.signUpConfirmMsg === '회원 탈퇴 하시겠습니까?'
                                     || selector.signUpConfirmModal.signUpConfirmMsg === '회원정보를 수정하시겠습니까?') && (
                                     <button onClick={onClickCloseBtn1}>취소</button>
                                 )
